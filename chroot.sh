@@ -212,9 +212,9 @@ wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
 }
 
 gitset(){
-git clone https://github.com/ak1ra26/archinst
-mv archinst /home/"${URN}"/
-chown "${URN}":wheel -R /home/"${URN}"/archinst
+git clone https://github.com/ak1ra26/arch
+mv arch /home/"${URN}"/
+chown "${URN}":wheel -R /home/"${URN}"/arch
 sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!"; s_scream
 }
