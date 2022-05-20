@@ -1,0 +1,3 @@
+If you're looking to speed up Firefox page renders:
+Type about:config in the address bar and press Enter.
+Find gfx.webrender.all and change it to true
