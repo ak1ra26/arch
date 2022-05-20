@@ -2,7 +2,7 @@
 set -uo pipefail # If a variable gets an error the script exits immediately.
 trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; exit "${S}"' ERR
 #=================# User, hostname and UUID variables. #=================#
-URN="${URN}"					## Username                  ##
+URN="alex"					## Username                  ##
 HTN="archbase";yayvbox="";vboxpack="";opttorrent="";gwenspec=""
 UUID_Data=`lsblk -o PATH,UUID | grep '/dev/sdb1' | awk 'NF>1{print $NF}'`;
 UUID_Mega=`lsblk -o PATH,UUID | grep '/dev/sdb2' | awk 'NF>1{print $NF}'`;
