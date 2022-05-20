@@ -64,6 +64,12 @@ do
             ;;
         "wayland (less then default)")
             PACKAGES="vlc songrec neofetch bashtop ktouch yt-dlp python-pip"
+            clear
+            echo; echo " Installing gwenview"
+            asksure
+            if	[[ $XX = 0 ]]; then
+            gwenspec="gwenview"
+            fi
             break
             ;;
         "fast for work in X11")
@@ -73,13 +79,6 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
-
-clear
-echo; echo " Installing gwenview"
-asksure
-if	[[ $XX = 0 ]]; then
-gwenspec="gwenview"
-fi
 
 clear
 echo 'Please enter your choice of torrent client: '
@@ -196,6 +195,7 @@ do
             chown "${URN}":wheel -R /home/"${URN}"/*
             chmod +x /home/"${URN}"/.local/share/templates/source/script
             chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
+            wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             break
             ;;
         "Sway")
@@ -208,7 +208,6 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
-wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
 }
 
 gitset(){
