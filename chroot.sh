@@ -62,7 +62,7 @@ do
             PACKAGES="vlc songrec neofetch bashtop aspell ktouch yt-dlp python-pip zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad"
             break
             ;;
-        "wayland (less then default)")
+        "wayland test")
             PACKAGES="vlc songrec neofetch bashtop ktouch yt-dlp python-pip"
             clear
             echo; echo " Installing gwenview"
