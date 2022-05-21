@@ -57,11 +57,7 @@ echo '127.0.0.1  localhost'                 				> /etc/hosts
 echo '::1        localhost'                 				>> /etc/hosts
 echo "127.0.1.1	 ${HTN}.localdomain ${HTN}" 				>> /etc/hosts
 }
-# sel_audio(){
-# sound_packages="pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber"
-# systemctl enable pipewire-pulse.service
-#
-# }
+
 pacinst(){
 clear
 echo 'Please enter your choice of packages: '
@@ -211,8 +207,6 @@ do
             ;;
         "Sway")
             pacman -S --needed sway swaylock swayidle waybar mesa xf86-video-vmware --noconfirm
-            pacman -S --needed pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber --noconfirm
-            systemctl enable pipewire-pulse.service
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
