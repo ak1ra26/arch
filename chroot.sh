@@ -206,7 +206,7 @@ do
             break
             ;;
         "Sway")
-            pacman -S --needed sway waybar dmenu mesa xf86-video-vmware foot mako --noconfirm
+            pacman -S --needed sway waybar dmenu wget mesa xf86-video-vmware foot mako --noconfirm
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
