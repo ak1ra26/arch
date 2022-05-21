@@ -206,7 +206,7 @@ do
             break
             ;;
         "Sway")
-            pacman -S --needed sway swaylock swayidle waybar mesa xf86-video-vmware --noconfirm
+            pacman -S --needed sway swaylock swayidle waybar dmenu mesa xf86-video-vmware --noconfirm
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
@@ -215,14 +215,13 @@ echo "[Service]
 ExecStart=
 ExecStart=-/usr/bin/agetty --autologin alex --noclear %I \$TERM" >> /home/alex/system/getty@tty1.service.d/override.conf
 
-# 	"dmenu",
 # 	"light",
 # 	"grim",
 # 	"slurp",
 # 	"pavucontrol",
 # 	"foot",
 #mesa xf86-video-vmware -- VirtualBox
-# wofi
+# dmenu or wofi
 # alacritty
 # xorg-server xorg-xinit
 
