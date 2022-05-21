@@ -21,6 +21,13 @@ asksure(){
 d_check(){
 [ -d "$d_chck" ] && rm -rf $d_chck
 }
+# sel_gfx_driver(){
+# "AMD / ATI (open-source)": "mesa xf86-video-amdgpu xf86-video-ati libva-mesa-driver vulkan-radeon"
+# "VMware / VirtualBox (open-source)": "mesa xf86-video-vmware"
+# }
+
+
+
 key_updater(){
 echo "
 This step can help with pacman keys problem,
@@ -50,7 +57,11 @@ echo '127.0.0.1  localhost'                 				> /etc/hosts
 echo '::1        localhost'                 				>> /etc/hosts
 echo "127.0.1.1	 ${HTN}.localdomain ${HTN}" 				>> /etc/hosts
 }
-
+# sel_audio(){
+# sound_packages="pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber"
+# systemctl enable pipewire-pulse.service
+#
+# }
 pacinst(){
 clear
 echo 'Please enter your choice of packages: '
@@ -69,7 +80,7 @@ do
             break
             ;;
         "wayland test")
-            PACKAGES="vlc songrec neofetch bashtop ktouch yt-dlp python-pip"
+            PACKAGES="wayland xorg-xwayland vlc songrec neofetch bashtop ktouch yt-dlp python-pip "
             break
             ;;
         "fast for work in X11")
@@ -199,10 +210,31 @@ do
             break
             ;;
         "Sway")
-            echo "no sway command [skipped]"
+            pacman -S --needed sway swaylock swayidle waybar mesa xf86-video-vmware --noconfirm
+            pacman -S --needed pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber --noconfirm
+            systemctl enable pipewire-pulse.service
+#             cp /etc/sway/config ~/.config/sway/
+echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
+exec sway
+fi" >> /home/alex/.bash_profile
+echo "[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin alex --noclear %I \$TERM" >> /home/alex/swaytest//override.conf
+
+# 	"dmenu",
+# 	"light",
+# 	"grim",
+# 	"slurp",
+# 	"pavucontrol",
+# 	"foot",
+#mesa xf86-video-vmware -- VirtualBox
+# wofi
+# alacritty
+# xorg-server xorg-xinit
+
             break
             ;;
-        "I don't need no educa... torrent client")
+        "I don't need no educa... desktop")
             break
             ;;
         *) echo "invalid option $REPLY";;
