@@ -213,7 +213,7 @@ exec sway
 fi" >> /home/alex/.bash_profile
 echo "[Service]
 ExecStart=
-ExecStart=-/usr/bin/agetty --autologin alex --noclear %I \$TERM" >> /home/alex/swaytest//override.conf
+ExecStart=-/usr/bin/agetty --autologin alex --noclear %I \$TERM" >> /home/alex/system/getty@tty1.service.d/override.conf
 
 # 	"dmenu",
 # 	"light",
