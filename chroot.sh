@@ -178,7 +178,7 @@ cat $Dir_Data/Media/Doc*/K*/Logins | grep "n@r" > /home/${URN}/faststart
 echo "yy年MM月dd日 | HH持mm分ss秒" >> /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/kismia/auto_vpn >> /home/${URN}/faststart
-curl https://raw.githubusercontent.com/ak1ra26/test/main/yay.sh > /home/${URN}/yay.sh
+curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh > /home/${URN}/yay.sh
 chmod +x /home/${URN}/runchrome /home/${URN}/yay.sh
 echo -e "Created ${c_green} .hidden ${c_no} and ${c_green} .xbindkeysrc ${c_no} files"
 
@@ -206,7 +206,7 @@ do
             break
             ;;
         "Sway")
-            pacman -S --needed sway swaylock swayidle waybar dmenu mesa xf86-video-vmware --noconfirm
+            pacman -S --needed sway waybar dmenu mesa xf86-video-vmware foot mako --noconfirm
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
