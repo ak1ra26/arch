@@ -133,7 +133,7 @@ else
     echo '# Data' >> /etc/fstab
     echo "UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
     mount UUID=$UUID_Data /media/Data
-    chown "${URN}":wheel -R /media/Data/*
+    chown -R "${URN}":"${URN}" /media/Data/
 fi
 
 if grep --quiet "$UUID_Mega" /etc/fstab; then
@@ -143,7 +143,7 @@ else
     echo '# Mega' >> /etc/fstab
     echo "UUID=$UUID_Mega /media/Mega               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
     mount UUID=$UUID_Mega /media/Mega
-    chown "${URN}":wheel -R /media/Mega/*
+    chown -R "${URN}":"${URN}" /media/Mega/
     chmod +x -R /media/Mega/sh/*
 fi
 }
