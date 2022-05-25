@@ -89,20 +89,14 @@ done
 
 clear
 echo 'Please enter your choice of torrent client: '
-options=("transmission-qt" "transmission-gtk" "transmission-cli" "I don't need no educa... torrent client")
+options=("transmission-qt" "transmission-cli" "I don't need no educa... torrent client")
 select opttorrent in "${options[@]}"
 do
     case $opttorrent in
         "transmission-qt")
-
-            break
-            ;;
-        "transmission-gtk")
-
             break
             ;;
         "transmission-cli")
-
             break
             ;;
         "I don't need no educa... torrent client")
@@ -252,7 +246,7 @@ scrmount
 aliaslinks
 desktopconf
 gitset
-} |& tee chroot_inst.log
-mv chroot_inst.log /home/"${URN}"/
+} |& tee chroot.log
+mv chroot.log /home/"${URN}"/
 umount /media/Mega
 umount /media/Data
