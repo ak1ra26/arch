@@ -243,6 +243,23 @@ sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!";
 }
 
+testthis(){
+echo "[Desktop Entry]
+Comment=
+Exec=/media/Mega/sh/kismia/work.sh
+Icon=among-us
+Name=Work
+NoDisplay=false
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+" > /home/alex/.local/share/applications/Work.desktop
+}
+
 # Group bracket below for logging #
 {
 key_updater
@@ -252,6 +269,7 @@ scrmount
 aliaslinks
 desktopconf
 gitset
+testthis
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
 umount /media/Mega
