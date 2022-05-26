@@ -48,14 +48,19 @@ elif [[ $x_key == 1 ]]; then
 echo " Key-update is scipped "
 fi
 }
-locallocale(){
-echo "en_US.UTF-8 UTF-8" 						> /etc/locale.gen
-echo "ru_RU.UTF-8 UTF-8" 						>> /etc/locale.gen
-echo "uk_UA.UTF-8 UTF-8" 						>> /etc/locale.gen
+localtimehost(){
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
+echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo '127.0.0.1  localhost'                 				> /etc/hosts
-echo '::1        localhost'                 				>> /etc/hosts
-echo "127.0.1.1	 ${HTN}.localdomain ${HTN}" 				>> /etc/hosts
+ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+hwclock --systohc
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+echo '127.0.0.1  localhost' > /etc/hosts
+echo '::1        localhost' >> /etc/hosts
+echo "127.0.1.1	 ${HTN}.localdomain ${HTN}" >> /etc/hosts
+echo "${HTN}" > /etc/hostname
 }
 
 pacinst(){
@@ -240,7 +245,8 @@ echo ; echo "Exit then reboot!"; s_scream
 # Group bracket below for logging #
 {
 key_updater
-locallocale
+timezone
+localization
 pacinst
 scrmount
 aliaslinks
