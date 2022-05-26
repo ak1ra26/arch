@@ -177,8 +177,8 @@ cat $Dir_Data/Media/Doc*/K*/Logins | grep "n@r" > /home/${URN}/faststart
 echo "yy年MM月dd日 | HH持mm分ss秒" >> /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/kismia/auto_vpn >> /home/${URN}/faststart
-curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh > /home/${URN}/yay.sh
-chmod +x /home/${URN}/runchrome /home/${URN}/yay.sh
+# curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh > /home/${URN}/yay.sh
+# chmod +x /home/${URN}/runchrome /home/${URN}/yay.sh
 echo -e "Created ${c_green} .hidden ${c_no} and ${c_green} .xbindkeysrc ${c_no} files"
 
 ls /home/${URN} -all | grep ".hidden"
@@ -239,14 +239,13 @@ git clone https://github.com/ak1ra26/arch
 mv arch /home/"${URN}"/
 chown "${URN}":wheel -R /home/"${URN}"/arch
 sh $Dir_Mega/sh/config/git
-echo ; echo "Exit then reboot!"; s_scream
+echo ; echo "Exit then reboot!";
 }
 
 # Group bracket below for logging #
 {
 key_updater
-timezone
-localization
+localtimehost
 pacinst
 scrmount
 aliaslinks
