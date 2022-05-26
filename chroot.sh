@@ -258,6 +258,11 @@ Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
 " > /home/alex/.local/share/applications/Work.desktop
+
+cp -r /media/Mega/sh/config/khotkeysrc /home/alex/.config/khotkeysrc # hotkeys
+cp -r /media/Mega/sh/config/kxkbrc /home/alex/.config/kxkbrc # ua_lang adder
+#wallp inside plasma-org.kde.plasma.desktop-appletsrc
+
 }
 
 # Group bracket below for logging #
