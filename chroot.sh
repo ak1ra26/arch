@@ -71,7 +71,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell ktouch yt-dlp python-pip zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad"
+            PACKAGES="vlc songrec neofetch bashtop aspell ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad"
             clear
             echo; echo " Installing gwenview"
             asksure
@@ -81,11 +81,11 @@ do
             break
             ;;
         "wayland test")
-            PACKAGES="wayland xorg-xwayland vlc songrec neofetch bashtop ktouch yt-dlp python-pip "
+            PACKAGES="wayland xorg-xwayland vlc songrec neofetch bashtop ktouch yt-dlp "
             break
             ;;
         "fast for work in X11")
-            PACKAGES="vlc python-pip zenity xdotool xbindkeys xsel xorg-xinput"
+            PACKAGES="vlc zenity xdotool xbindkeys xsel xorg-xinput"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -114,7 +114,7 @@ done
 
 clear
 pacman -Syu --noconfirm
-pacman -S --needed $PACKAGES $opttorrent $gwenspec --noconfirm
+pacman -S --needed $PACKAGES $opttorrent $gwenspec ntfs-3g python-pip --noconfirm
 # Google API
 pip install google-api-python-client -q
 pip install oauth2client -q
@@ -202,6 +202,7 @@ do
             chmod +x /home/"${URN}"/.local/share/templates/source/script
             chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
+            pacman -S partitionmanager
             break
             ;;
         "Sway")
