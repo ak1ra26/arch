@@ -50,7 +50,7 @@ fi
 }
 localtimehost(){
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
+#echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
@@ -73,7 +73,7 @@ do
         "default")
             PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad"
             clear
-            echo; echo " Installing gwenview"
+            echo; echo " Install gwenview?"
             asksure
             if	[[ $XX = 0 ]]; then
             gwenspec="gwenview"
@@ -81,10 +81,10 @@ do
             break
             ;;
         "wayland test")
-            PACKAGES="wayland xorg-xwayland vlc songrec neofetch bashtop ktouch yt-dlp "
+            PACKAGES="wayland xorg-xwayland"
             break
             ;;
-        "fast for work in X11")
+        "fast for work")
             PACKAGES="vlc zenity xdotool xbindkeys xsel xorg-xinput"
             break
             ;;
@@ -169,20 +169,20 @@ d_chck="/home/${URN}/Pictures" && d_check
 ln -s $Dir_Data/Media/Pictures /home/${URN}/Pictures
 d_chck="/home/${URN}/Music" && d_check
 ln -s $Dir_Data/Media/Music /home/${URN}/Music
+d_chck="/home/${URN}/Downloads" && d_check
+ln -s $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
 ln -s $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
 ln -s $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
-ln -s $Dir_Mega/sh/kismia/chrome_kismia.sh /home/${URN}/runchrome
-cat $Dir_Data/Media/Doc*/K*/Logins | grep "n@r" > /home/${URN}/faststart
-echo "yy年MM月dd日 | HH持mm分ss秒" >> /home/${URN}/faststart; echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
+ln -s $Dir_Mega/sh/kismia/work.sh /home/${URN}/work.sh
+cat $Dir_Data/Media/Doc*/Ki*/Logins | grep "n@r" > /home/${URN}/faststart
+echo "MM月dd日 | HH持mm分ss秒" >> /home/${URN}/faststart; echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/kismia/auto_vpn >> /home/${URN}/faststart
-# curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh > /home/${URN}/yay.sh
-# chmod +x /home/${URN}/runchrome /home/${URN}/yay.sh
-echo -e "Created ${c_green} .hidden ${c_no} and ${c_green} .xbindkeysrc ${c_no} files"
 
 ls /home/${URN} -all | grep ".hidden"
 ls /home/${URN} -all | grep ".xbindkeysrc"
+echo -e "Created ${c_green} .hidden ${c_no} and ${c_green} .xbindkeysrc ${c_no} files"
 }
 
 desktopconf(){
@@ -210,21 +210,7 @@ do
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
-fi" >> /home/alex/.bash_profile
-# echo "[Service]
-# ExecStart=
-# ExecStart=-/usr/bin/agetty --autologin alex --noclear %I \$TERM" >> /home/alex/system/getty@tty1.service.d/override.conf
-
-# 	"light",
-# 	"grim",
-# 	"slurp",
-# 	"pavucontrol",
-# 	"foot",
-#mesa xf86-video-vmware -- VirtualBox
-# dmenu or wofi
-# alacritty
-# xorg-server xorg-xinit
-
+fi" >> /home/${URN}/.bash_profile
             break
             ;;
         "I don't need no educa... desktop")
@@ -257,10 +243,10 @@ TerminalOptions=
 Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
-" > /home/alex/.local/share/applications/Work.desktop
+" > /home/${URN}/.local/share/applications/Work.desktop
 
-cp -r /media/Mega/sh/config/khotkeysrc /home/alex/.config/khotkeysrc # hotkeys
-cp -r /media/Mega/sh/config/kxkbrc /home/alex/.config/kxkbrc # ua_lang adder
+cp -r /media/Mega/sh/config/shortcuts /home/${URN}/.config/khotkeysrc # hotkeys
+cp -r /media/Mega/sh/config/kxkbrc /home/${URN}/.config/kxkbrc # ua_lang adder
 #wallp inside plasma-org.kde.plasma.desktop-appletsrc
 
 }

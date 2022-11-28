@@ -43,7 +43,7 @@ else
 yvbox=""
 fi
 
-yay -S spotify google-chrome slack-desktop sox windscribe-cli firefox-beta-bin $yvbox --noconfirm
+yay -S spotify google-chrome slack-desktop sox windscribe-cli firefox-beta-bin authy $yvbox --noconfirm
 }
 
 if [[ `id -u` -ne 0 ]] ; then yayinst ; exit 1 ; fi
