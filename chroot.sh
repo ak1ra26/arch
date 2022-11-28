@@ -3,7 +3,7 @@ set -uo pipefail # If a variable gets an error the script exits immediately.
 trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; exit "${S}"' ERR
 #=================# User, hostname and UUID variables. #=================#
 URN="alex"					## Username                  ##
-HTN="archbase";yayvbox="";vboxpack="";opttorrent="";gwenspec=""
+HTN="archbase";yayvbox="";vboxpack="";desktopselect="";
 UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0" #`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
 UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978" #`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
 #========================================================================#
@@ -71,13 +71,8 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad"
+            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad steam transmission-qt gwenview ntfs-3g"
             clear
-            echo; echo " Install gwenview?"
-            asksure
-            if	[[ $XX = 0 ]]; then
-            gwenspec="gwenview"
-            fi
             break
             ;;
         "wayland test")
@@ -85,27 +80,7 @@ do
             break
             ;;
         "fast for work")
-            PACKAGES="vlc zenity xdotool xbindkeys xsel xorg-xinput"
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
-
-clear
-echo 'Please enter your choice of torrent client: '
-options=("transmission-qt" "transmission-cli" "I don't need no educa... torrent client")
-select opttorrent in "${options[@]}"
-do
-    case $opttorrent in
-        "transmission-qt")
-            break
-            ;;
-        "transmission-cli")
-            break
-            ;;
-        "I don't need no educa... torrent client")
-            opttorrent=''
+            PACKAGES="vlc zenity xdotool xbindkeys xsel xorg-xinput gwenview"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -114,7 +89,7 @@ done
 
 clear
 pacman -Syu --noconfirm
-pacman -S --needed $PACKAGES $opttorrent $gwenspec ntfs-3g python-pip --noconfirm
+pacman -S --needed $PACKAGES python-pip --noconfirm
 # Google API
 pip install google-api-python-client -q
 pip install oauth2client -q
@@ -176,7 +151,6 @@ ln -s $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
 ln -s $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
 ln -s $Dir_Mega/sh/kismia/work.sh /home/${URN}/work.sh
 cat $Dir_Data/Media/Doc*/Ki*/Logins | grep "n@r" > /home/${URN}/faststart
-echo "MM月dd日 | HH持mm分ss秒" >> /home/${URN}/faststart; echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/kismia/auto_vpn >> /home/${URN}/faststart
 
@@ -189,9 +163,9 @@ desktopconf(){
 clear
 echo 'Your desktop is '
 options=("KDE" "Sway" "I don't need no educa... desktop")
-select opttorrent in "${options[@]}"
+select desktopselect in "${options[@]}"
 do
-    case $opttorrent in
+    case $desktopselect in
         "KDE")
             git clone https://github.com/ak1ra26/KDE
             rm -rf KDE/.git
@@ -202,7 +176,9 @@ do
             chmod +x /home/"${URN}"/.local/share/templates/source/script
             chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
-            pacman -S partitionmanager
+            echo "" >> /home/${URN}/faststart
+            echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
+            pacman -S --needed partitionmanager --noconfirm
             break
             ;;
         "Sway")
