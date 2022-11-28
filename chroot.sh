@@ -4,8 +4,8 @@ trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; e
 #=================# User, hostname and UUID variables. #=================#
 URN="alex"					## Username                  ##
 HTN="archbase";yayvbox="";vboxpack="";opttorrent="";gwenspec=""
-UUID_Data=`lsblk -o PATH,UUID | grep '/dev/sdb1' | awk 'NF>1{print $NF}'`;
-UUID_Mega=`lsblk -o PATH,UUID | grep '/dev/sdb2' | awk 'NF>1{print $NF}'`;
+UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0" #`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
+UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978" #`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
 #========================================================================#
 asksure(){
 		echo -n " Proceed? (Y/N)"
@@ -253,14 +253,14 @@ cp -r /media/Mega/sh/config/kxkbrc /home/${URN}/.config/kxkbrc # ua_lang adder
 
 # Group bracket below for logging #
 {
-key_updater
+#key_updater
 localtimehost
 pacinst
 scrmount
 aliaslinks
 desktopconf
 gitset
-testthis
+#testthis
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
 umount /media/Mega
