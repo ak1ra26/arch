@@ -23,7 +23,7 @@ Other
 14. Turn off search
 15. Інколи yay.sh не спрацьовує з першого разу через спотіфай, якщо нема firefox-beta, то ще раз запустити скріпт, але скіпнути Spotify.
 16. /media/Mega/sh/config/git.sh запустити
-16. Панель вгору перенести, та додати календар (перед цим зробити reboot) | MM月dd日 | HH持mm分ss秒 | Need a fix, waiting https://github.com/Zren/plasma-applet-eventcalendar/issues/333
+16. Панель вгору перенести, та додати календар (перед цим зробити reboot) | MM月dd日 | HH持mm分ss秒 | Need a fix, waiting <a href="https://github.com/Zren/plasma-applet-eventcalendar/issues/333">archinstall</a>
 
 
 Доробити:
