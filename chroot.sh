@@ -71,7 +71,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad steam transmission-qt gwenview ntfs-3g"
+            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad steam transmission-qt gwenview ntfs-3g lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader steam"
             clear
             break
             ;;
