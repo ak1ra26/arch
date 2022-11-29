@@ -43,7 +43,7 @@ else
 yvbox=""
 fi
 
-yay -S google-chrome slack-desktop --noconfirm
+yay -S google-chrome slack-desktop plasma5-applets-eventcalendar --noconfirm
 yay -S firefox-beta-bin authy sox $yvbox --noconfirm
 yay -S windscribe-cli --noconfirm
 yay -S spotify
