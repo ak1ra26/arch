@@ -4,9 +4,9 @@ I use this after <a href="https://python-archinstall.readthedocs.io/en/latest/in
 <h2>Using:</h2>
 <p>curl https://raw.githubusercontent.com/ak1ra26/arch/main/aic.sh>aic.sh</p>
 <p>chmod +x aic.sh<br>or<br>chmod +x *.sh</p>
-<p>run ./aic.sh</p>
+<p>run <code>./aic.sh</code></p>
 <p>Go into chroot</p>
-<p>curl https://raw.githubusercontent.com/ak1ra26/arch/main/chroot.sh>chroot.sh</p>
+<p><code>curl https://raw.githubusercontent.com/ak1ra26/arch/main/chroot.sh>chroot.sh</code></p>
 <p>chmod +x chroot.sh<br>or<br>chmod +x *.sh</p>
 <p>Edit with nano if required and run ./chroot.sh</p>
 <h3>About files:</h3>
