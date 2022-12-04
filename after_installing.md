@@ -25,16 +25,12 @@ MEGA.nz
 Що з авто-git входом?
 Firefox не запускається, але якщо спробувати через sudo (не дасть), але після цього запрацює.
 Firefox-beta автоматична зміна іконки, щоб не плутатись.
-Steam (обрати треба необхідне, уточнити яку опцію саме тре)
 
 Кріпта:
 Придумати більш швидкий вхід (декодіровка автоматична тощо, а також сайт для додавання мереж у метамаск підготувати)
 
 sudo mount /dev/sdb1 /mnt
 sudo cp -r /mnt/EFI/Microsoft/ /boot/EFI/
-
-sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
-sudo pacman -S steam
 
 #VPN
 sudo systemctl start windscribe.service
