@@ -88,8 +88,8 @@ do
 done
 
 clear
-pacman -Syu --noconfirm
-pacman -S --needed $PACKAGES python-pip --noconfirm
+pacman -Syu --noconfirm --disable-download-timeout
+pacman -S --needed $PACKAGES python-pip --noconfirm --disable-download-timeout
 # Google API
 pip install google-api-python-client -q
 pip install oauth2client -q
@@ -178,11 +178,11 @@ do
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             echo "" >> /home/${URN}/faststart
             echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
-            pacman -S --needed partitionmanager --noconfirm
+            pacman -S --needed partitionmanager --noconfirm --disable-download-timeout
             break
             ;;
         "Sway")
-            pacman -S --needed sway waybar dmenu wget mesa xf86-video-vmware foot mako --noconfirm
+            pacman -S --needed sway waybar dmenu wget mesa xf86-video-vmware foot mako --noconfirm --disable-download-timeout
 #             cp /etc/sway/config ~/.config/sway/
 echo "if [ \"$(tty)\" = \"/dev/tty1\" ]; then
 exec sway
