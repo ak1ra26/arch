@@ -64,6 +64,8 @@ sed -i 's/_commit=gc5f8b819/_commit=gc5f8b819-2/g;s/3cc25f28ae791ac26607117a5df6
 makepkg -si
 cd .. && rm -fr spotify
 fi
+#dark_theme KDE
+lookandfeeltool -a org.kde.breezedark.desktop
 }
 
 if [[ `id -u` -ne 0 ]] ; then yayinst ; exit 1 ; fi

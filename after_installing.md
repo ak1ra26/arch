@@ -1,11 +1,11 @@
 Settings:
 
-1. Change theme to Breeze Dark.
+1. Change theme to Breeze Dark. #lookandfeeltool -a org.kde.breezedark.desktop перевірити, бо не все замінює.
 2. Set animation speed to more instant
 3. Appearance > Global Theme > Window Decorations - set Breeze / set Titlebar Buttons to the left side.
 4. Icons > Papirus-Dark
 5. Workspace Behavior > Screen Edges - set "No Action".
-6. Screen Locking - no lock after | 300 seconds / Recent Files - Keep for 1 month | Do not remember
+6. Screen Locking - no lock after | 300 seconds / Recent Files - Keep for 1 month | Do not remember #/home/username/.config/kscreenlockerrc
 7. Startup and Shutdown - change SDDM theme | Desktop Session - no confirm & start with empty session
 8. Add my custom shortcuts | Вказати trigger для telegram | Одразу можна тг налаштувати.
 9. Додати українську розкладку клавіатури та налаштувати переключення між мовами.
