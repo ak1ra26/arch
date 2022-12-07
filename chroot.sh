@@ -3,7 +3,7 @@ set -uo pipefail # If a variable gets an error the script exits immediately.
 trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; exit "${S}"' ERR
 #=================# User, hostname and UUID variables. #=================#
 URN="alex"					## Username                  ##
-HTN="archbase";yayvbox="";vboxpack="";desktopselect="";
+yayvbox="";vboxpack="";desktopselect="";
 UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0" #`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
 UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978" #`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
 #========================================================================#
@@ -49,6 +49,26 @@ echo " Key-update is scipped "
 fi
 }
 localtimehost(){
+clear
+echo 'Please enter your name for machine: '
+options=("base" "laptop")
+select namechooser in "${options[@]}"
+do
+    case $namechooser in
+        "base")
+            HTN="archbase";
+            clear
+            break
+            ;;
+        "laptop")
+            HTN="archlap";
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
+
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 #echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
@@ -71,7 +91,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad steam transmission-qt gwenview ntfs-3g lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader steam"
+            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g steam"
             clear
             break
             ;;

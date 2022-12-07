@@ -1,12 +1,16 @@
 #!/bin/bash
 
 echo 'Please enter your choice of config (don\'t use sway option for now) : '
-options=("default" "sway")
+options=("default" "Lenovo T440" "sway")
 select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
             conl="3FqFtQWJ"
+            break
+            ;;
+        "Lenovo T440")
+            conl="0Qzyd9BF"
             break
             ;;
         "sway")
