@@ -23,7 +23,7 @@ Settings:
 MEGA.nz
 Що з авто-git входом?
 Firefox не запускається, але якщо спробувати через sudo (не дасть), то після цього запрацює.
-Firefox-beta автоматична зміна іконки, щоб не плутатись. /usr/share/applications/
+Firefox-beta автоматична зміна іконки, щоб не плутатись. /usr/share/applications/ or here https://unix.stackexchange.com/questions/256593/how-do-i-change-the-icon-for-an-application-on-the-kde-panel
 
 Кріпта:
 Придумати більш швидкий вхід (декодіровка автоматична тощо, а також сайт для додавання мереж у метамаск підготувати)
