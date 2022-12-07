@@ -64,8 +64,8 @@ do
             ;;
         "laptop")
             HTN="archlap";
-            UUID_Data="###"
-            UUID_Mega="###"
+            UUID_Data="f3091c5c-3a1f-4f04-a7d7-93618ba72670"
+            UUID_Mega="9f6193cf-ef1e-4ee6-b33e-4d531aaf8c6c"
             break
             ;;
         *) echo "invalid option $REPLY";;
