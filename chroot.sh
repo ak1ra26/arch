@@ -4,8 +4,8 @@ trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; e
 #=================# User, hostname and UUID variables. #=================#
 URN="alex"					## Username                  ##
 yayvbox="";vboxpack="";desktopselect="";
-UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0" #`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
-UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978" #`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
+#`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
+#`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
 #========================================================================#
 asksure(){
 		echo -n " Proceed? (Y/N)"
@@ -57,11 +57,15 @@ do
     case $namechooser in
         "base")
             HTN="archbase";
+            UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0"
+            UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978"
             clear
             break
             ;;
         "laptop")
             HTN="archlap";
+            UUID_Data="###"
+            UUID_Mega="###"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -91,7 +95,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g steam"
+            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g sox steam discord"
             clear
             break
             ;;
