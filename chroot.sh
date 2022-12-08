@@ -131,8 +131,9 @@ else
     echo '# Data' >> /etc/fstab
     echo "UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
     mount UUID=$UUID_Data /media/Data
-    chown -R "${URN}":"${URN}" /media/Data/
 fi
+    chown -R "${URN}":"${URN}" /media/Data/
+    chmod +x -R /media/Data/Mega/sh/*
 
 # if grep --quiet "$UUID_Mega" /etc/fstab; then
 #     echo Mega exists
