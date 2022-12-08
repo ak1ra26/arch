@@ -64,7 +64,7 @@ do
             ;;
         "laptop")
             HTN="archlap";
-            UUID_Data="585564f7-21fc-4c31-a76f-8857741760ee"
+            UUID_Data="3a7c0936-091f-4b51-b869-ec1365758548"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -123,6 +123,8 @@ scrmount(){
 #sgdisk -A 2:set:63 /dev/sdb # fix duplicate in fstab file. (nope)
 mkdir -p /media/{Data,Share}
 if grep --quiet "$UUID_Data" /etc/fstab; then
+    echo -en '\n' >> /etc/fstab
+    echo "#UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab #щоб не копіювати якщо щось пішло не так.
     echo Data exists
 else
     echo -en '\n' >> /etc/fstab
