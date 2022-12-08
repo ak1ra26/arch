@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'Please enter your choice of config (don\'t use sway option for now) : '
+echo 'Please enter your choice of config : '
 options=("default" "Lenovo T440" "sway")
 select optpackages in "${options[@]}"
 do
@@ -14,12 +14,12 @@ do
             break
             ;;
         "sway")
-            conl="g1VMkaeq"
+            conl="g1VMkaeq --disk_layouts https://pastebin.com/raw/PVAi240a"
             break
             ;;
         *) echo "invalid option $REPLY";;
     esac
-#done
+done
 archinstall --config https://pastebin.com/raw/$conl
 
 

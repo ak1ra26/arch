@@ -227,28 +227,6 @@ sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!";
 }
 
-testthis(){
-echo "[Desktop Entry]
-Comment=
-Exec=/media/Data/Mega/sh/kismia/work.sh
-Icon=among-us
-Name=Work
-NoDisplay=false
-Path=
-StartupNotify=false
-Terminal=false
-TerminalOptions=
-Type=Application
-X-KDE-SubstituteUID=false
-X-KDE-Username=
-" > /home/${URN}/.local/share/applications/Work.desktop
-
-cp -r /media/Data/Mega/sh/config/shortcuts /home/${URN}/.config/khotkeysrc # hotkeys
-cp -r /media/Data/Mega/sh/config/kxkbrc /home/${URN}/.config/kxkbrc # ua_lang adder
-#wallp inside plasma-org.kde.plasma.desktop-appletsrc
-
-}
-
 # Group bracket below for logging #
 {
 #key_updater
@@ -258,7 +236,6 @@ scrmount
 aliaslinks
 desktopconf
 gitset
-#testthis
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
 # umount /media/Mega
