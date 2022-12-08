@@ -58,14 +58,14 @@ do
         "base")
             HTN="archbase";
             UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0"
-            UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978"
+#             UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978"
             clear
             break
             ;;
         "laptop")
             HTN="archlap";
             UUID_Data="f3091c5c-3a1f-4f04-a7d7-93618ba72670"
-            UUID_Mega="9f6193cf-ef1e-4ee6-b33e-4d531aaf8c6c"
+#             UUID_Mega="9f6193cf-ef1e-4ee6-b33e-4d531aaf8c6c"
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -74,7 +74,6 @@ done
 
 
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-#echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
 echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
@@ -123,7 +122,7 @@ echo "Pips for work was installed"
 
 scrmount(){
 #sgdisk -A 2:set:63 /dev/sdb # fix duplicate in fstab file. (nope)
-mkdir -p /media/{Data,Mega}
+mkdir -p /media/{Data,Share}
 if grep --quiet "$UUID_Data" /etc/fstab; then
     echo Data exists
 else
@@ -134,16 +133,16 @@ else
     chown -R "${URN}":"${URN}" /media/Data/
 fi
 
-if grep --quiet "$UUID_Mega" /etc/fstab; then
-    echo Mega exists
-else
-    echo -en '\n' >> /etc/fstab
-    echo '# Mega' >> /etc/fstab
-    echo "UUID=$UUID_Mega /media/Mega               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
-    mount UUID=$UUID_Mega /media/Mega
-    chown -R "${URN}":"${URN}" /media/Mega/
-    chmod +x -R /media/Mega/sh/*
-fi
+# if grep --quiet "$UUID_Mega" /etc/fstab; then
+#     echo Mega exists
+# else
+#     echo -en '\n' >> /etc/fstab
+#     echo '# Mega' >> /etc/fstab
+#     echo "UUID=$UUID_Mega /media/Data/Mega               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
+#     mount UUID=$UUID_Mega /media/Data/Mega
+#     chown -R "${URN}":"${URN}" /media/Data/Mega/
+#     chmod +x -R /media/Data/Mega/sh/*
+# fi
 }
 
 aliaslinks(){
@@ -152,8 +151,8 @@ if grep "\. /" /home/${URN}/.bashrc | grep --quiet "bash_aliases"; then
 else
 echo -en '\n' >> /home/${URN}/.bashrc
 echo "# ak1ra26" >> /home/${URN}/.bashrc
-echo "if [ -f /media/Mega/sh/config/bash_aliases ]; then" >> /home/${URN}/.bashrc
-echo ". /media/Mega/sh/config/bash_aliases" >> /home/${URN}/.bashrc
+echo "if [ -f /media/Data/Mega/sh/config/bash_aliases ]; then" >> /home/${URN}/.bashrc
+echo ". /media/Data/Mega/sh/config/bash_aliases" >> /home/${URN}/.bashrc
 echo "fi" >> /home/${URN}/.bashrc
 echo "Done! You can use ur aliases."
 fi
@@ -201,7 +200,7 @@ do
             chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             echo "" >> /home/${URN}/faststart
-            echo "/media/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
+            echo "/media/Data/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
             pacman -S --needed partitionmanager --noconfirm --disable-download-timeout
             break
             ;;
@@ -232,7 +231,7 @@ echo ; echo "Exit then reboot!";
 testthis(){
 echo "[Desktop Entry]
 Comment=
-Exec=/media/Mega/sh/kismia/work.sh
+Exec=/media/Data/Mega/sh/kismia/work.sh
 Icon=among-us
 Name=Work
 NoDisplay=false
@@ -245,8 +244,8 @@ X-KDE-SubstituteUID=false
 X-KDE-Username=
 " > /home/${URN}/.local/share/applications/Work.desktop
 
-cp -r /media/Mega/sh/config/shortcuts /home/${URN}/.config/khotkeysrc # hotkeys
-cp -r /media/Mega/sh/config/kxkbrc /home/${URN}/.config/kxkbrc # ua_lang adder
+cp -r /media/Data/Mega/sh/config/shortcuts /home/${URN}/.config/khotkeysrc # hotkeys
+cp -r /media/Data/Mega/sh/config/kxkbrc /home/${URN}/.config/kxkbrc # ua_lang adder
 #wallp inside plasma-org.kde.plasma.desktop-appletsrc
 
 }
@@ -263,5 +262,5 @@ gitset
 #testthis
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
-umount /media/Mega
+# umount /media/Mega
 umount /media/Data

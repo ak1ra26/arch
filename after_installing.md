@@ -14,7 +14,7 @@ Settings:
 12. Turn off micro in Audio
 13. Turn off energy saving
 14. Turn off search
-15. /media/Mega/sh/config/git.sh запустити
+15. /media/Data/Mega/sh/config/git.sh запустити
 16. Панель вгору перенести, та додати календар (перед цим зробити reboot) | MM月dd日 | HH持mm分ss秒 | Need a fix, waiting <a href="https://github.com/Zren/plasma-applet-eventcalendar/issues/333">issues/333</a>
 
 
@@ -41,4 +41,3 @@ windscribe connect
 sudo pacman -S libreoffice-fresh
 sudo pacman -S unrar
 yay -S zoom
-yay -S megasync
