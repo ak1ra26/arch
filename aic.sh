@@ -7,20 +7,23 @@ do
     case $optpackages in
         "default")
             conl="3FqFtQWJ"
+            disl=""
             break
             ;;
         "Lenovo T440")
             conl="0Qzyd9BF"
+            disl="--disk_layouts https://pastebin.com/raw/PVAi240a"
             break
             ;;
         "sway")
-            conl="g1VMkaeq --disk_layouts https://pastebin.com/raw/PVAi240a"
+            conl="g1VMkaeq"
+            disl=""
             break
             ;;
         *) echo "invalid option $REPLY";;
     esac
 done
-archinstall --config https://pastebin.com/raw/$conl
+archinstall --config https://pastebin.com/raw/$conl $disl
 
 
 
