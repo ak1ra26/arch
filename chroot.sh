@@ -203,6 +203,7 @@ do
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             echo "" >> /home/${URN}/faststart
             echo "/media/Data/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
+            ln -s $Dir_Mega/sh/config/applications-kmenuedit.menu /home/${URN}/.config/menus/ # KDE applications
             pacman -S --needed partitionmanager --noconfirm --disable-download-timeout
             break
             ;;
