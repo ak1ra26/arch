@@ -205,6 +205,8 @@ do
             ln -s /home/${URN}/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
             rm -rf /home/${URN}/.config/kxkbrc
             ln -s /home/${URN}/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
+            rm -rf /home/${URN}/.config/khotkeysrc
+            ln -s /home/${URN}/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
             rm -rf /home/${URN}/.local/share/user-places.xbel
             ln -s /home/${URN}/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
             chown ${URN}:wheel -R /home/${URN}/arch/*
