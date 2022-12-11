@@ -196,8 +196,9 @@ do
             mv arch /home/${URN}/
             mkdir -p /home/${URN}/.local/share
             ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
-            ln -s /home/${URN}/arch/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
-            ln -s /home/${URN}/arch/KDE/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
+            ln -s /home/${URN}/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
+            ln -s /home/${URN}/arch/KDE/Applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
+            ln -s /home/${URN}/arch/KDE/Applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
             rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
             ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
             rm -rf /home/${URN}/.config/kscreenlockerrc
@@ -207,7 +208,7 @@ do
             rm -rf /home/${URN}/.local/share/user-places.xbel
             ln -s /home/${URN}/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
             chown ${URN}:wheel -R /home/${URN}/arch/*
-            chmod +x /home/${URN}/arch/KDE/* #потрібно??
+            chmod +x /home/${URN}/arch/KDE/Applications/* #потрібно??
             chmod +x /home/${URN}/arch/*
             break
             ;;
