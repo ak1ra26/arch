@@ -174,7 +174,6 @@ ln -s $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
 ln -s $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
 ln -s $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
-ln -s $Dir_Mega/sh/work/work.sh /home/${URN}/work.sh
 cat $Dir_Data/Media/Doc*/Ki*/Logins | grep "n@r" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/work/auto_vpn >> /home/${URN}/faststart
@@ -198,6 +197,7 @@ do
             mkdir -p /home/${URN}/.local/share
             ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
             ln -s /home/${URN}/arch/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
+            ln -s /home/${URN}/arch/KDE/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
             rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
             ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
             rm -rf /home/${URN}/.config/kscreenlockerrc
