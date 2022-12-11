@@ -1,12 +1,7 @@
 [Desktop Entry]
-Comment[en_US]=
 Comment=
-Exec=$Dir_Mega/sh/work/work.sh
-GenericName[en_US]=
-GenericName=
+Exec=/media/Data/Mega/sh/work/work.sh
 Icon=google-chrome-unstable
-MimeType=
-Name[en_US]=Work
 Name=Work
 NoDisplay=false
 Path=
@@ -14,7 +9,5 @@ StartupNotify=false
 Terminal=false
 TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
 X-KDE-Username=
