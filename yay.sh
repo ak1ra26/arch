@@ -53,6 +53,7 @@ else
 yvbox=""
 fi
 
+yay --save --answerdiff None --answerclean None --removemake
 yay -S google-chrome slack-desktop firefox-beta-bin authy windscribe-cli plasma5-applets-eventcalendar $yvbox --noconfirm --disable-download-timeout #libpdfium megasync fix!!!!
 yay -S spotify --noconfirm --disable-download-timeout
 
