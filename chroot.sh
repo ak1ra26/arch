@@ -93,7 +93,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g sox steam discord"
+            PACKAGES="partitionmanager vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g sox steam discord"
             clear
             break
             ;;
@@ -199,7 +199,6 @@ do
             mv KDE /home/"${URN}"/
             chown "${URN}":wheel -R /home/"${URN}"/*
             chmod +x /home/"${URN}"/.local/share/templates/source/script
-            chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             echo "" >> /home/${URN}/faststart
             echo "/media/Data/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
@@ -207,7 +206,8 @@ do
             rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu;ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
             rm -rf /home/${URN}/.config/kscreenlockerrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
             rm -rf /home/${URN}/.config/kxkbrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kxkbrc # Add UA lang
-            pacman -S --needed partitionmanager --noconfirm --disable-download-timeout
+            rm -rf /home/${URN}/.local/share/user-places.xbel;ln -s $Dir_Mega/sh/config/KDE/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
+            chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
             break
             ;;
         "Sway")

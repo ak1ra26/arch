@@ -8,11 +8,10 @@ Settings:
 6. Add my custom shortcuts | Вказати trigger для telegram | Одразу можна тг налаштувати.
 7. Set monitors
 8. Night Color
-9. Turn off micro in Audio
-10. Turn off energy saving
-11. Turn off search
-12. /media/Data/Mega/sh/config/git.sh запустити
-13. Панель вгору перенести, та додати календар (перед цим зробити reboot) | MM月dd日 | HH持mm分ss秒 | Need a fix, waiting <a href="https://github.com/Zren/plasma-applet-eventcalendar/issues/333">issues/333</a>
+9. Configure energy saving
+10. Turn off search
+11. /media/Data/Mega/sh/config/git.sh запустити
+12. Панель вгору перенести, та додати календар (перед цим зробити reboot) | MM月dd日 | HH持mm分ss秒 | Need a fix, waiting <a href="https://github.com/Zren/plasma-applet-eventcalendar/issues/333">issues/333</a>
 
 
 Доробити:
