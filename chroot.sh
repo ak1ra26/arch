@@ -192,12 +192,11 @@ select desktopselect in "${options[@]}"
 do
     case $desktopselect in
         "KDE")
+            wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             git clone https://github.com/ak1ra26/arch
             mv arch /home/${URN}/
-#             chown "${URN}":wheel -R /home/"${URN}"/arch
             mkdir -p /home/${URN}/.local/share
             ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
-            wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             ln -s /home/${URN}/arch/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
             rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
             ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
@@ -207,10 +206,9 @@ do
             ln -s /home/${URN}/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
             rm -rf /home/${URN}/.local/share/user-places.xbel
             ln -s /home/${URN}/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
-            chown ${URN}:wheel -R /home/${URN}/.* # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
-            chown ${URN}:wheel -R /home/${URN}/*
-            chmod +x /home/${URN}/arch/KDE/*
-            chmod +x /home/${URN}/arch/KDE/Dolphin/templates/source/* # можливо зайве
+            chown ${URN}:wheel -R /home/${URN}/arch/*
+            chmod +x /home/${URN}/arch/KDE/* #потрібно??
+            chmod +x /home/${URN}/arch/*
             break
             ;;
         "Sway")
