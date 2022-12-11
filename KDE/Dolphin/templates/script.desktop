@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=script...
+Comment=Enter scrip filename:
+Type=Link
+URL=source/script
+Icon=application-x-shellscript

@@ -174,10 +174,10 @@ ln -s $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
 ln -s $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
 ln -s $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
-ln -s $Dir_Mega/sh/kismia/work.sh /home/${URN}/work.sh
+ln -s $Dir_Mega/sh/work/work.sh /home/${URN}/work.sh
 cat $Dir_Data/Media/Doc*/Ki*/Logins | grep "n@r" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
-cat $Dir_Mega/sh/kismia/auto_vpn >> /home/${URN}/faststart
+cat $Dir_Mega/sh/work/auto_vpn >> /home/${URN}/faststart
 
 ls /home/${URN} -all | grep ".hidden"
 ls /home/${URN} -all | grep ".xbindkeysrc"
@@ -192,22 +192,25 @@ select desktopselect in "${options[@]}"
 do
     case $desktopselect in
         "KDE")
-            git clone https://github.com/ak1ra26/KDE
-            rm -rf KDE/.git
-            mkdir -p /home/"${URN}"/.local/share
-            mv KDE/templates /home/"${URN}"/.local/share/
-            mv KDE /home/"${URN}"/
-            chown "${URN}":wheel -R /home/"${URN}"/*
-            chmod +x /home/"${URN}"/.local/share/templates/source/script
+            git clone https://github.com/ak1ra26/arch
+            mv arch /home/${URN}/
+#             chown "${URN}":wheel -R /home/"${URN}"/arch
+            mkdir -p /home/${URN}/.local/share
+            ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
-            echo "" >> /home/${URN}/faststart
-            echo "/media/Data/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
-            ln -s $Dir_Mega/sh/config/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop && chmod +x $Dir_Mega/sh/config/KDE/Work.desktop # Run work.sh from menu
-            rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu;ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
-            rm -rf /home/${URN}/.config/kscreenlockerrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
-            rm -rf /home/${URN}/.config/kxkbrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kxkbrc # Add UA lang
-            rm -rf /home/${URN}/.local/share/user-places.xbel;ln -s $Dir_Mega/sh/config/KDE/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
-            chown "${URN}":wheel -R /home/"${URN}"/.local # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
+            ln -s /home/${URN}/arch/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
+            rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
+            ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
+            rm -rf /home/${URN}/.config/kscreenlockerrc
+            ln -s /home/${URN}/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
+            rm -rf /home/${URN}/.config/kxkbrc
+            ln -s /home/${URN}/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
+            rm -rf /home/${URN}/.local/share/user-places.xbel
+            ln -s /home/${URN}/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
+            chown ${URN}:wheel -R /home/${URN}/.* # fix unable to save bookmarks in /home/$USER/.local/share/user-places.xbel error.
+            chown ${URN}:wheel -R /home/${URN}/*
+            chmod +x /home/${URN}/arch/KDE/*
+            chmod +x /home/${URN}/arch/KDE/Dolphin/templates/source/* # можливо зайве
             break
             ;;
         "Sway")
@@ -227,9 +230,6 @@ done
 }
 
 gitset(){
-git clone https://github.com/ak1ra26/arch
-mv arch /home/"${URN}"/
-chown "${URN}":wheel -R /home/"${URN}"/arch
 sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!";
 }

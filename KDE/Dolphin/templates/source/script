@@ -1,0 +1,2 @@
+#!/bin/bash -i
+set +o history # temporarily suspend history with bash -i.
