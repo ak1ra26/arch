@@ -203,8 +203,10 @@ do
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             echo "" >> /home/${URN}/faststart
             echo "/media/Data/Mega/sh/kismia/work.sh" >> /home/${URN}/faststart
-            ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/ # KDE applications
             ln -s $Dir_Mega/sh/config/KDE/Work.desktop /home/${URN}/.local/share/applications/Work.desktop && chmod +x $Dir_Mega/sh/config/KDE/Work.desktop # Run work.sh from menu
+            rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu;ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
+            rm -rf /home/${URN}/.config/kscreenlockerrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
+            rm -rf /home/${URN}/.config/kxkbrc;ln -s $Dir_Mega/sh/config/KDE/kscreenlockerrc /home/${URN}/.config/kxkbrc # Add UA lang
             pacman -S --needed partitionmanager --noconfirm --disable-download-timeout
             break
             ;;
