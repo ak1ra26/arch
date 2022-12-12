@@ -15,12 +15,12 @@ Settings:
 
 
 Доробити:
-MEGA.nz
 Що з авто-git входом?
 
 Крипта:
 Придумати більш швидкий вхід (декодіровка автоматична тощо, а також сайт для додавання мереж у метамаск підготувати)
 
+#Хуїта (можливо колись знадобиться)
 sudo mount /dev/sdb1 /mnt
 sudo cp -r /mnt/EFI/Microsoft/ /boot/EFI/
 
@@ -31,6 +31,4 @@ windscribe login
 windscribe connect
 
 #Other
-sudo pacman -S libreoffice-fresh
-sudo pacman -S unrar
-yay -S zoom
+sudo pacman -S libreoffice-fresh unrar
