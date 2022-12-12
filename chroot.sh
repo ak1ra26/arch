@@ -132,7 +132,8 @@ else
     echo "UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
     mount UUID=$UUID_Data /media/Data
 fi
-    chown -R "${URN}":"${URN}" /media/Data/
+    chown -R ${URN}:wheel /media/Data/
+#   chown -R ${URN}:wheel /media/Data/Mega/ # убрати решітку якщо не працює Mega.
     chmod +x -R /media/Data/Mega/sh/*
 
 # if grep --quiet "$UUID_Mega" /etc/fstab; then
@@ -234,6 +235,10 @@ gitset(){
 sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!";
 }
+megainst(){
+wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
+pacman -U megasync-x86_64.pkg.tar.zst --noconfirm
+}
 
 # Group bracket below for logging #
 {
@@ -244,7 +249,7 @@ scrmount
 aliaslinks
 desktopconf
 gitset
+megainst
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
-# umount /media/Mega
 umount /media/Data
