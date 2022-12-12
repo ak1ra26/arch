@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xbel>
-<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
+<xbel xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv">
  <info>
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
@@ -57,6 +57,28 @@
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1670751021/1</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///media/Data/Media/Videos">
+  <title>Videos</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-videos"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1670876916/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///media/Data/Projects">
+  <title>Projects</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-projects"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1670875278/0</ID>
    </metadata>
   </info>
  </bookmark>
