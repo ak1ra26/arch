@@ -195,6 +195,7 @@ do
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             git clone https://github.com/ak1ra26/arch
             mv arch /home/${URN}/
+#           sed -i -e "s/name=breeze-dark/name=breeze/" "$HOME/.config/plasmarc" && plasmashell --replace
             mkdir -p /home/${URN}/.local/share
             ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
             ln -s /home/${URN}/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop

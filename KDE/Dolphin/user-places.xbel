@@ -60,6 +60,39 @@
    </metadata>
   </info>
  </bookmark>
+ <bookmark href="file:///media/Data/Media/Books">
+  <title>Books</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-books"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1670900146/3</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///media/Data/Media/Documents">
+  <title>Documents</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-projects"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1670899963/1</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///media/Data/Media/Downloads">
+  <title>Downloads</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-downloads"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1670899965/2</ID>
+   </metadata>
+  </info>
+ </bookmark>
  <bookmark href="file:///media/Data/Media/Videos">
   <title>Videos</title>
   <info>
