@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=
-Exec=$Dir_Mega/sh/work/work.sh
+Exec=/media/Data/Mega/sh/work/work.sh
 Icon=google-chrome-unstable
 Name=Work
 NoDisplay=false
