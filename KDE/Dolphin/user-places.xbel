@@ -75,10 +75,10 @@
   <title>Books</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-books"/>
+    <bookmark:icon name="folder-green-books"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1670900146/3</ID>
+    <ID>1671310294/0</ID>
    </metadata>
   </info>
  </bookmark>
@@ -86,7 +86,7 @@
   <title>Documents</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-projects"/>
+    <bookmark:icon name="folder-green-projects"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1670899963/1</ID>
@@ -115,17 +115,6 @@
    </metadata>
   </info>
  </bookmark>
- <bookmark href="file:///media/Data/Media/ISO">
-  <title>ISO</title>
-  <info>
-   <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-cd"/>
-   </metadata>
-   <metadata owner="http://www.kde.org">
-    <ID>1671301554/1</ID>
-   </metadata>
-  </info>
- </bookmark>
  <bookmark href="file:///media/Data/Media/Music">
   <title>Music</title>
   <info>
@@ -141,10 +130,10 @@
   <title>Pictures</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-pictures"/>
+    <bookmark:icon name="folder-green-pictures"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1671301560/3</ID>
+    <ID>1671375867/0</ID>
    </metadata>
   </info>
  </bookmark>

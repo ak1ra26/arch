@@ -214,7 +214,7 @@ do
             chown ${URN}:wheel -R /home/${URN}/arch/*
             chmod +x /home/${URN}/arch/KDE/Applications/* #потрібно??
             chmod +x /home/${URN}/arch/*
-            pacman -S --needed okular --noconfirm
+            pacman -S --needed okular ocrdesktop tesseract-data-ukr --noconfirm
             break
             ;;
         "Sway")
