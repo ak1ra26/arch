@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xbel>
-<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:kdepriv="http://www.kde.org/kdepriv">
+<xbel xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks">
  <info>
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
@@ -159,6 +159,17 @@
    </metadata>
   </info>
  </bookmark>
+ <bookmark href="file:///media/Data/Projects/A4">
+  <title>A4</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-documents"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1671926228/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
  <bookmark href="file:///media/Data/Mega">
   <title>Mega</title>
   <info>
@@ -276,6 +287,28 @@
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1670751077/2</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="smb://desktop-rvdjeh3/Users/Public/Share">
+  <title>Share</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="network-workgroup"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1671986573/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="smb://desktop-rvdjeh3/">
+  <title/>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="network-workgroup"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1671985122/0</ID>
    </metadata>
   </info>
  </bookmark>

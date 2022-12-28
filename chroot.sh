@@ -88,7 +88,7 @@ echo "${HTN}" > /etc/hostname
 pacinst(){
 clear
 echo 'Please enter your choice of packages: '
-options=("default" "wayland test" "fast for work")
+options=("default" "wayland test")
 select optpackages in "${options[@]}"
 do
     case $optpackages in
@@ -101,10 +101,6 @@ do
             PACKAGES="wayland xorg-xwayland"
             break
             ;;
-        "fast for work")
-            PACKAGES="vlc zenity xdotool xbindkeys xsel xorg-xinput gwenview"
-            break
-            ;;
         *) echo "invalid option $REPLY";;
     esac
 done
@@ -112,6 +108,9 @@ done
 clear
 pacman -Syu --noconfirm --disable-download-timeout
 pacman -S --needed $PACKAGES python-pip --noconfirm --disable-download-timeout
+# Mega
+wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
+pacman -U megasync-x86_64.pkg.tar.zst --noconfirm
 # Google API
 pip install google-api-python-client -q
 pip install oauth2client -q
@@ -237,10 +236,6 @@ gitset(){
 sh $Dir_Mega/sh/config/git
 echo ; echo "Exit then reboot!";
 }
-megainst(){
-wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
-pacman -U megasync-x86_64.pkg.tar.zst --noconfirm
-}
 
 # Group bracket below for logging #
 {
@@ -251,7 +246,6 @@ scrmount
 aliaslinks
 desktopconf
 gitset
-megainst
 } |& tee chroot.log
 mv chroot.log /home/"${URN}"/
 umount /media/Data
