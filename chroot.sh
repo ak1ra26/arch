@@ -106,7 +106,11 @@ do
 done
 
 clear
-pacman -Syu --noconfirm --disable-download-timeout
+# Reflector
+pacman -S reflector --noconfirm
+reflector --verbose --country 'Ukraine,Germany' -l 25 -p https --sort rate  --save /etc/pacman.d/mirrorlist
+pacman -Syu --noconfirm
+
 pacman -S --needed $PACKAGES python-pip --noconfirm --disable-download-timeout
 # Mega
 wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
@@ -213,7 +217,7 @@ do
             chown ${URN}:wheel -R /home/${URN}/arch/*
             chmod +x /home/${URN}/arch/KDE/Applications/* #потрібно??
             chmod +x /home/${URN}/arch/*
-            pacman -S --needed okular ocrdesktop tesseract-data-ukr --noconfirm
+            pacman -S --needed okular ocrdesktop tesseract-data-ukr kwallet-pam --noconfirm
             break
             ;;
         "Sway")
