@@ -217,7 +217,10 @@ do
             chown ${URN}:wheel -R /home/${URN}/arch/*
             chmod +x /home/${URN}/arch/KDE/Applications/* #потрібно??
             chmod +x /home/${URN}/arch/*
-            pacman -S --needed okular ocrdesktop tesseract-data-ukr kwallet-pam --noconfirm
+            pacman -S --needed okular ocrdesktop tesseract-data-ukr kwallet-pam fcitx5 fcitx5-gtk fcitx5-qt fcitx5-mozc --noconfirm
+            echo "GTK_IM_MODULE=fcitx" >> /etc/environment
+            echo "QT_IM_MODULE=fcitx" >> /etc/environment
+            echo "XMODIFIERS=@im=fcitx" >> /etc/environment
             break
             ;;
         "Sway")
