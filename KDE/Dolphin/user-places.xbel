@@ -86,10 +86,10 @@
   <title>Documents</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-green-projects"/>
+    <bookmark:icon name="folder-yellow-projects"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1670899963/1</ID>
+    <ID>1672681172/3</ID>
    </metadata>
   </info>
  </bookmark>
@@ -130,10 +130,10 @@
   <title>Pictures</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-green-pictures"/>
+    <bookmark:icon name="folder-yellow-pictures"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1671375867/0</ID>
+    <ID>1672681152/2</ID>
    </metadata>
   </info>
  </bookmark>
@@ -167,6 +167,17 @@
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1671926228/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="file:///media/Data/Projects/%E6%97%A5%E6%9C%AC%E8%AA%9E">
+  <title>日本語</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="folder-yellow-copy-cloud"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1672681021/1</ID>
    </metadata>
   </info>
  </bookmark>
