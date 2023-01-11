@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xbel>
-<xbel xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks">
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
  <info>
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
@@ -75,10 +75,10 @@
   <title>Books</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-green-books"/>
+    <bookmark:icon name="folder-yellow-books"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1671310294/0</ID>
+    <ID>1672776868/0</ID>
    </metadata>
   </info>
  </bookmark>
@@ -170,14 +170,14 @@
    </metadata>
   </info>
  </bookmark>
- <bookmark href="file:///media/Data/Projects/%E6%97%A5%E6%9C%AC%E8%AA%9E">
-  <title>日本語</title>
+ <bookmark href="file:///media/Data/Projects/English">
+  <title>English</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-copy-cloud"/>
+    <bookmark:icon name="inode-directory"/>
    </metadata>
    <metadata owner="http://www.kde.org">
-    <ID>1672681021/1</ID>
+    <ID>1673296535/0</ID>
    </metadata>
   </info>
  </bookmark>
@@ -276,17 +276,6 @@
     <ID>1669667254/8</ID>
     <isSystemItem>true</isSystemItem>
     <IsHidden>true</IsHidden>
-   </metadata>
-  </info>
- </bookmark>
- <bookmark href="file:///media/Data/Mega/Camera%20Uploads">
-  <title>Camera Uploads</title>
-  <info>
-   <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-red-photo"/>
-   </metadata>
-   <metadata owner="http://www.kde.org">
-    <ID>1670899804/0</ID>
    </metadata>
   </info>
  </bookmark>

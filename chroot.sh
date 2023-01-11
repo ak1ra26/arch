@@ -178,7 +178,7 @@ ln -s $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
 ln -s $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
 ln -s $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
-cat $Dir_Data/Media/Doc*/Ki*/Logins | grep "n@r" > /home/${URN}/faststart
+cat $Dir_Data/Media/Documents/Work/Logins | grep "n@remote.q" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Mega/sh/work/auto_vpn >> /home/${URN}/faststart
 
