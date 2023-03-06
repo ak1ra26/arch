@@ -59,13 +59,14 @@ yay -S spotify --noconfirm --disable-download-timeout
 
 #sni-qt is an optional dependencies for megasync. It fixes systray issue on KDE and LXQt
 # Це фікс помилки при встановленні Spotify because they release a new pkg with a different commit number and a different checksum. Дякую Joan31 за підказку. Але треба перевірити, бо писав цей код у блокноті на зміні, коли мене відволікали. Треба _commit=gc5f8b819 замінити на _commit=gc5f8b819-2, а 3cc25f28ae791ac26607117a5df668f803ed8e58f0ace085010a6242fdde97766bdc1c752560850795c9b4324f3e019937fe9af2788a1946ebb70ee781f50d99 на 9ba6c2d155f683b9a38222d58a2a53a2a5f4b422ed1c0d603af87919ba8a68309aea3354278fd1d5d8142a1568d93b7e83b14c041e749b0c39f3bc155a633ef8, щоб Spotify встановився.
-qspackage=spotify && pacmancheck
-if	[[ $pacmancheckres = 0 ]]; then
-yay -G spotify && cd spotify
-sed -i 's/_commit=gc5f8b819/_commit=gc5f8b819-2/g;s/3cc25f28ae791ac26607117a5df668f803ed8e58f0ace085010a6242fdde97766bdc1c752560850795c9b4324f3e019937fe9af2788a1946ebb70ee781f50d99/9ba6c2d155f683b9a38222d58a2a53a2a5f4b422ed1c0d603af87919ba8a68309aea3354278fd1d5d8142a1568d93b7e83b14c041e749b0c39f3bc155a633ef8/g' PKGBUILD
-makepkg -si
-cd .. && rm -fr spotify
-fi
+# qspackage=spotify && pacmancheck
+# if	[[ $pacmancheckres = 0 ]]; then
+# yay -G spotify && cd spotify
+# sed -i 's/_commit=gc5f8b819/_commit=gc5f8b819-2/g;s/3cc25f28ae791ac26607117a5df668f803ed8e58f0ace085010a6242fdde97766bdc1c752560850795c9b4324f3e019937fe9af2788a1946ebb70ee781f50d99/9ba6c2d155f683b9a38222d58a2a53a2a5f4b422ed1c0d603af87919ba8a68309aea3354278fd1d5d8142a1568d93b7e83b14c041e749b0c39f3bc155a633ef8/g' PKGBUILD
+# makepkg -si
+# cd .. && rm -fr spotify
+# fi
+# Здається це пофіксили, тому видалю цей шматок, якщо це так.
 }
 
 if [[ `id -u` -ne 0 ]] ; then yayinst ; exit 1 ; fi
