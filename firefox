@@ -1,3 +1,17 @@
 If you're looking to speed up Firefox page renders:
 Type about:config in the address bar and press Enter.
 Find gfx.webrender.all and change it to true
+
+# змінна, яка містить шлях до директорії з профілям Firefox
+FIREFOX_PROFILE_PATH=~/.mozilla/firefox/*.default-release
+
+# перевірка чи існує директорія профілю Firefox
+if [ ! -d "$FIREFOX_PROFILE_PATH" ]; then
+  echo "Помилка: Директорія профілю Firefox не існує"
+  exit 1
+fi
+
+# заміна параметра gfx.webrender.all на true в конфігураційному файлі Firefox
+sed -i 's/gfx.webrender.all.*/gfx.webrender.all true/' $FIREFOX_PROFILE_PATH/prefs.js
+
+echo "Параметр gfx.webrender.all був змінений на true"

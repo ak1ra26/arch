@@ -65,6 +65,7 @@ install_packages() {
         "plasma5-applets-eventcalendar"
         "sni-qt"
         "spotify"
+        "perl-image-exiftool"
     )
 
     # Prompt user for confirmation before installing Virtualbox
