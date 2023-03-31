@@ -62,7 +62,7 @@ install_packages() {
         "windscribe-cli"
         "qt5-imageformats"
         "kimageformats"
-        "plasma5-applets-eventcalendar"
+#        "plasma5-applets-eventcalendar"
         "sni-qt"
         "spotify"
         "perl-image-exiftool"
@@ -77,9 +77,28 @@ install_packages() {
             echo "Virtualbox [skipped]"
     fi
 
+    # Prompt user for confirmation before installing plasma5-applets-eventcalendar
+    echo "Installing plasma5-applets-eventcalendar"
+    asksure
+    if [[ $XX -eq 0 ]]; then
+    packages+=("go")
+    else
+            echo "go [skipped]"
+            echo "plasma5-applets-eventcalendar [skipped]"
+    fi
+
     # Install packages using yay
     yay --save --answerdiff None --answerclean None --removemake -S "${packages[@]}" --noconfirm --disable-download-timeout
+
+    # Installing plasma5-applets-eventcalendar
+    if [[ $XX -eq 0 ]]; then
+    git clone https://github.com/kanocz/plasma-applet-eventcalendar eventcalendar # OAuth2 authorization
+    # git clone https://github.com/Zren/plasma-applet-eventcalendar.git eventcalendar # original, but without OAuth2
+    cd eventcalendar
+    sh ./install && rm -rf eventcalendar
+    fi
 }
+
 
 # Check if user is not root before running the script
 if [[ $(id -u) -eq 0 ]]; then
