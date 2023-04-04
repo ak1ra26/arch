@@ -64,7 +64,7 @@ install_packages() {
         "kimageformats"
 #        "plasma5-applets-eventcalendar"
         "sni-qt"
-        "spotify"
+#        "spotify"
         "perl-image-exiftool"
     )
 

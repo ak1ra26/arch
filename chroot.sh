@@ -152,15 +152,23 @@ fi
 }
 
 aliaslinks(){
-if grep "\. /" /home/${URN}/.bashrc | grep --quiet "bash_aliases"; then
+if grep "\. /" /home/${URN}/.bashrc | grep --quiet "base.so"; then
     echo "Bash_aliases is ON. Scip";
 else
-echo -en '\n' >> /home/${URN}/.bashrc
-echo "# ak1ra26" >> /home/${URN}/.bashrc
-echo "if [ -f /media/Data/Mega/sh/config/bash_aliases ]; then" >> /home/${URN}/.bashrc
-echo ". /media/Data/Mega/sh/config/bash_aliases" >> /home/${URN}/.bashrc
-echo "fi" >> /home/${URN}/.bashrc
-echo "Done! You can use ur aliases."
+# echo -en '\n' >> /home/${URN}/.bashrc
+# echo "# ak1ra26" >> /home/${URN}/.bashrc
+# echo "if [ -f /media/Data/Mega/sh/lib/base.so ]; then" >> /home/${URN}/.bashrc
+# echo "source /media/Data/Mega/sh/lib/base.so # особиста бібліотека." >> /home/${URN}/.bashrc
+# echo "fi" >> /home/${URN}/.bashrc
+# echo "Done! You can use ur aliases."
+cat <<EOT >> /home/${URN}/.bashrc
+
+# ak1ra26
+if [ -f /media/Data/Mega/sh/lib/base.so ]; then
+    source /media/Data/Mega/sh/lib/base.so # особиста бібліотека.
+fi
+Done! You can use ur aliases.
+EOT
 fi
 
 . /home/${URN}/.bashrc # Turn on .bashrc in this part
