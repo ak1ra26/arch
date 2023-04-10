@@ -1,9 +1,9 @@
 #!/bin/bash -i
 set -uo pipefail # If a variable gets an error the script exits immediately.
 trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; exit "${S}"' ERR
-#=================# User, hostname and UUID variables. #=================#
+
 URN="alex";yayvbox="";vboxpack="";desktopselect="";
-#========================================================================#
+
 asksure() {
     while true; do
         read -r -n 1 -p "Proceed? (Y/N) " answer
@@ -17,55 +17,28 @@ asksure() {
 }
 
 key_updater(){
-echo "
-This step can help with pacman keys problem,
-if old ISO ArchLinux is using! "
-echo " Update pac-keys?  "
-while
-read -n1 -p "
-1 - nope
-0 - yes, this ISO is old " x_key
-echo ''
-[[ "$x_key" =~ [^10] ]]
-do
-:
-done
-if [[ $x_key == 0 ]]; then
-pacman-key --refresh-keys
-elif [[ $x_key == 1 ]]; then
-echo " Key-update is skipped "
-fi
+    echo "This step can help resolve issues with Pacman keys, in case an old ArchLinux ISO is being used."
+    asksure && [[ $XX == 0 ]] && pacman-key --refresh-keys || echo " Key-update is skipped "
 }
+
 localtimehost() {
     clear
-    echo 'Please enter your name for machine: '
-    options=("base" "laptop")
-    select namechooser in "${options[@]}"
-    do
-        case $namechooser in
-            "base")
-                HTN="archbase"
-                UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0"
-                clear
-                break
-                ;;
-            "laptop")
-                HTN="archlap"
-                UUID_Data="3a7c0936-091f-4b51-b869-ec1365758548"
-                break
-                ;;
-            *) echo "invalid option $REPLY"
-        esac
+    echo 'Please select your device:: '
+    declare -A options=([PC]='archbase 6f0617e9-3a7e-410d-99d3-3555b525d5a0' [laptop]='archlap 3a7c0936-091f-4b51-b869-ec1365758548')
+    select namechooser in "${!options[@]}"; do
+    if [[ -n ${options[$namechooser]} ]]; then
+        read -r HTN UUID_Data <<<"${options[$namechooser]}"
+        clear
+        break
+    else
+        echo "invalid option $REPLY"
+    fi
     done
 
-    echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen
-    locale-gen
-    ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
-    hwclock --systohc
+    echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen; locale-gen
+    ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime; hwclock --systohc
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
-
     echo -e "127.0.0.1  localhost\n::1        localhost\n127.0.1.1  ${HTN}.localdomain ${HTN}" > /etc/hosts
-
     echo "${HTN}" > /etc/hostname
 }
 
@@ -77,7 +50,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview ntfs-3g sox steam discord"
+            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam"
             clear
             break
             ;;
@@ -123,7 +96,7 @@ cat <<EOT >> /home/${URN}/.bashrc
 
 # ak1ra26
 if [ -f /media/Data/Mega/sh/lib/base.so ]; then
-    source /media/Data/Mega/sh/lib/base.so # особиста бібліотека.
+    source /media/Data/Mega/sh/lib/base.so # Personal library.
 fi
 EOT
 fi
