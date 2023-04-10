@@ -136,7 +136,6 @@ else
     mount UUID=$UUID_Data /media/Data
 fi
     chown -R ${URN}:wheel /media/Data/
-#   chown -R ${URN}:wheel /media/Data/Mega/ # убрати решітку якщо не працює Mega.
     chmod +x -R /media/Data/Mega/sh/*
 
 # if grep --quiet "$UUID_Mega" /etc/fstab; then
@@ -155,12 +154,6 @@ aliaslinks(){
 if grep "\. /" /home/${URN}/.bashrc | grep --quiet "base.so"; then
     echo "Bash_aliases is ON. Scip";
 else
-# echo -en '\n' >> /home/${URN}/.bashrc
-# echo "# ak1ra26" >> /home/${URN}/.bashrc
-# echo "if [ -f /media/Data/Mega/sh/lib/base.so ]; then" >> /home/${URN}/.bashrc
-# echo "source /media/Data/Mega/sh/lib/base.so # особиста бібліотека." >> /home/${URN}/.bashrc
-# echo "fi" >> /home/${URN}/.bashrc
-# echo "Done! You can use ur aliases."
 cat <<EOT >> /home/${URN}/.bashrc
 
 # ak1ra26
@@ -203,10 +196,10 @@ select desktopselect in "${options[@]}"
 do
     case $desktopselect in
         "KDE")
+        #################### ALARM терміново тут все переробити!?
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
             git clone https://github.com/ak1ra26/arch
             mv arch /home/${URN}/
-#           sed -i -e "s/name=breeze-dark/name=breeze/" "$HOME/.config/plasmarc" && plasmashell --replace
             mkdir -p /home/${URN}/.local/share
             ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
             ln -s /home/${URN}/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
@@ -254,7 +247,7 @@ echo ; echo "Exit then reboot!";
 
 # Group bracket below for logging #
 {
-#key_updater
+key_updater
 localtimehost
 pacinst
 scrmount
