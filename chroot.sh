@@ -50,7 +50,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xdotool xbindkeys xsel xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam"
+            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam"
             clear
             break
             ;;
@@ -67,7 +67,6 @@ clear
 pacman -S reflector --noconfirm
 reflector --verbose --country 'Ukraine,Germany' -l 25 -p https --sort rate  --save /etc/pacman.d/mirrorlist
 pacman -Syyu --noconfirm
-
 # Install necessary packages and libraries
 pacman -S --needed $PACKAGES python-pip --noconfirm --disable-download-timeout
 # Install Mega and Google API packages
@@ -92,13 +91,13 @@ aliaslinks(){
 if grep "\. /" /home/${URN}/.bashrc | grep --quiet "base.so"; then
     echo "Bash_aliases is ON. Skip";
 else
-cat <<EOT >> /home/${URN}/.bashrc
-
+cat > /home/${URN}/.bashrc <<EOF
 # ak1ra26
+[[ \$- != *i* ]] && return # If not running interactively, don't do anything
 if [ -f /media/Data/Mega/sh/lib/base.so ]; then
     source /media/Data/Mega/sh/lib/base.so # Personal library.
 fi
-EOT
+EOF
 fi
 
 . /home/${URN}/.bashrc # Turn on .bashrc in this part
