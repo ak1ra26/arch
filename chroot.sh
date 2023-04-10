@@ -26,8 +26,6 @@ d_check(){
 # "VMware / VirtualBox (open-source)": "mesa xf86-video-vmware"
 # }
 
-
-
 key_updater(){
 echo "
 This step can help with pacman keys problem,
@@ -45,44 +43,40 @@ done
 if [[ $x_key == 0 ]]; then
 pacman-key --refresh-keys
 elif [[ $x_key == 1 ]]; then
-echo " Key-update is scipped "
+echo " Key-update is skipped "
 fi
 }
-localtimehost(){
-clear
-echo 'Please enter your name for machine: '
-options=("base" "laptop")
-select namechooser in "${options[@]}"
-do
-    case $namechooser in
-        "base")
-            HTN="archbase";
-            UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0"
-#             UUID_Mega="b94728e9-d898-4cf5-a38d-d778e5edf978"
-            clear
-            break
-            ;;
-        "laptop")
-            HTN="archlap";
-            UUID_Data="3a7c0936-091f-4b51-b869-ec1365758548"
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
+localtimehost() {
+    clear
+    echo 'Please enter your name for machine: '
+    options=("base" "laptop")
+    select namechooser in "${options[@]}"
+    do
+        case $namechooser in
+            "base")
+                HTN="archbase"
+                UUID_Data="6f0617e9-3a7e-410d-99d3-3555b525d5a0"
+                clear
+                break
+                ;;
+            "laptop")
+                HTN="archlap"
+                UUID_Data="3a7c0936-091f-4b51-b869-ec1365758548"
+                break
+                ;;
+            *) echo "invalid option $REPLY"
+        esac
+    done
 
+    echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen
+    locale-gen
+    ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
+    hwclock --systohc
+    echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen
-locale-gen
-ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
-hwclock --systohc
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
+    echo -e "127.0.0.1  localhost\n::1        localhost\n127.0.1.1  ${HTN}.localdomain ${HTN}" > /etc/hosts
 
-echo '127.0.0.1  localhost' > /etc/hosts
-echo '::1        localhost' >> /etc/hosts
-echo "127.0.1.1	 ${HTN}.localdomain ${HTN}" >> /etc/hosts
-echo "${HTN}" > /etc/hostname
+    echo "${HTN}" > /etc/hostname
 }
 
 pacinst(){
@@ -126,28 +120,14 @@ scrmount(){
 #sgdisk -A 2:set:63 /dev/sdb # fix duplicate in fstab file. (nope)
 mkdir -p /media/{Data,Share}
 if grep --quiet "$UUID_Data" /etc/fstab; then
-    echo -en '\n' >> /etc/fstab
-    echo "#UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab #щоб не копіювати якщо щось пішло не так.
     echo Data exists
 else
-    echo -en '\n' >> /etc/fstab
-    echo '# Data' >> /etc/fstab
-    echo "UUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
+    echo -e "\n# Data\nUUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
     mount UUID=$UUID_Data /media/Data
 fi
-    chown -R ${URN}:wheel /media/Data/
-    chmod +x -R /media/Data/Mega/sh/*
-
-# if grep --quiet "$UUID_Mega" /etc/fstab; then
-#     echo Mega exists
-# else
-#     echo -en '\n' >> /etc/fstab
-#     echo '# Mega' >> /etc/fstab
-#     echo "UUID=$UUID_Mega /media/Data/Mega               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
-#     mount UUID=$UUID_Mega /media/Data/Mega
-#     chown -R "${URN}":"${URN}" /media/Data/Mega/
-#     chmod +x -R /media/Data/Mega/sh/*
-# fi
+    chown -R $URN:$URN /media/Data/
+    find /media/Data/Mega/sh/ -type f -iname "*.sh" -exec chmod +x {} \;
+    find /media/Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
 }
 
 aliaslinks(){
@@ -196,28 +176,25 @@ select desktopselect in "${options[@]}"
 do
     case $desktopselect in
         "KDE")
-        #################### ALARM терміново тут все переробити!?
             wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
-            git clone https://github.com/ak1ra26/arch
-            mv arch /home/${URN}/
             mkdir -p /home/${URN}/.local/share
-            ln -s /home/${URN}/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
-            ln -s /home/${URN}/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
-            ln -s /home/${URN}/arch/KDE/Applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
-            ln -s /home/${URN}/arch/KDE/Applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
+            ln -s /media/Data/Projects/Github/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
+            ln -s /media/Data/Projects/Github/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
+            ln -s /media/Data/Projects/Github/arch/KDE/Applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
+            ln -s /media/Data/Projects/Github/arch/KDE/Applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
             rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
             ln -s $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
             rm -rf /home/${URN}/.config/kscreenlockerrc
-            ln -s /home/${URN}/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
+            ln -s /media/Data/Projects/Github/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
             rm -rf /home/${URN}/.config/kxkbrc
-            ln -s /home/${URN}/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
+            ln -s /media/Data/Projects/Github/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
             rm -rf /home/${URN}/.config/khotkeysrc
-            ln -s /home/${URN}/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
+            ln -s /media/Data/Projects/Github/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
             rm -rf /home/${URN}/.local/share/user-places.xbel
-            ln -s /home/${URN}/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
-            chown ${URN}:wheel -R /home/${URN}/arch/*
-            chmod +x /home/${URN}/arch/KDE/Applications/* #потрібно??
-            chmod +x /home/${URN}/arch/*
+            ln -s /media/Data/Projects/Github/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
+            chown ${URN}:wheel -R /media/Data/Projects/Github/arch/*
+            chmod +x /media/Data/Projects/Github/arch/KDE/Applications/* #потрібно??
+            chmod +x /media/Data/Projects/Github/arch/*
             pacman -S --needed okular ocrdesktop tesseract-data-ukr kwallet-pam fcitx5 fcitx5-gtk fcitx5-qt fcitx5-mozc --noconfirm
             echo "GTK_IM_MODULE=fcitx" >> /etc/environment
             echo "QT_IM_MODULE=fcitx" >> /etc/environment
