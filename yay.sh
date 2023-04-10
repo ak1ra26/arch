@@ -36,8 +36,6 @@ packages=(
     "firefox-beta-bin"
     "authy"
     "windscribe-cli"
-    "qt5-imageformats"
-    "kimageformats"
     "sni-qt"
     "perl-image-exiftool"
     "abiword"
