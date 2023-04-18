@@ -38,7 +38,7 @@ packages=(
     "windscribe-cli"
     "sni-qt"
     "perl-image-exiftool"
-    "abiword"
+    "libreoffice-fresh"
     "nuspell"
 )
 

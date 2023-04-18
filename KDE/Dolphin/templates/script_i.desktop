@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Script (interactive)...
+Comment=Enter script (interactive) filename:
+Type=Link
+URL=source/script_i.sh
+Icon=application-x-shellscript

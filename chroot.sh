@@ -50,7 +50,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam"
+            PACKAGES="partitionmanager onboard vlc songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys xorg-xinput vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam xorg-xwininfo"
             clear
             break
             ;;
