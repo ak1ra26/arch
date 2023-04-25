@@ -129,6 +129,7 @@ cat $Dir_Mega/sh/work/auto_vpn >> /home/${URN}/faststart
 
 desktopconf(){
 clear
+systemctl enable bluetooth.service
 echo 'Your desktop is '
 options=("KDE" "I don't need no educa... desktop")
 select desktopselect in "${options[@]}"

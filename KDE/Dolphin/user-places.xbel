@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xbel>
-<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info" xmlns:kdepriv="http://www.kde.org/kdepriv">
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
  <info>
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
@@ -35,17 +35,6 @@
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1670749904/0</ID>
-   </metadata>
-  </info>
- </bookmark>
- <bookmark href="file:///media/Data/Screen">
-  <title>Screen</title>
-  <info>
-   <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="inode-directory"/>
-   </metadata>
-   <metadata owner="http://www.kde.org">
-    <ID>1681746901/0</ID>
    </metadata>
   </info>
  </bookmark>
@@ -167,28 +156,6 @@
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1670875278/0</ID>
-   </metadata>
-  </info>
- </bookmark>
- <bookmark href="file:///media/Data/Projects/A4">
-  <title>A4</title>
-  <info>
-   <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-yellow-documents"/>
-   </metadata>
-   <metadata owner="http://www.kde.org">
-    <ID>1671926228/0</ID>
-   </metadata>
-  </info>
- </bookmark>
- <bookmark href="file:///media/Data/Projects/ChatGPT">
-  <title>ChatGPT</title>
-  <info>
-   <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="/media/Data/Mega/sh/lib/icons/chatgpt-icon.svg"/>
-   </metadata>
-   <metadata owner="http://www.kde.org">
-    <ID>1680872492/0</ID>
    </metadata>
   </info>
  </bookmark>
