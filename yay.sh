@@ -40,6 +40,7 @@ packages=(
     "perl-image-exiftool"
     "libreoffice-fresh"
     "nuspell"
+    "ttf-google-fonts-git"
 )
 
 # Prompt user for confirmation before installing Virtualbox
