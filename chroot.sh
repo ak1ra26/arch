@@ -88,14 +88,14 @@ fi
 }
 
 aliaslinks(){
-if grep "\. /" /home/${URN}/.bashrc | grep --quiet "base.so"; then
+if grep "\. /" /home/${URN}/.bashrc | grep --quiet "lib.so"; then
     echo "Bash_aliases is ON. Skip";
 else
 cat > /home/${URN}/.bashrc <<EOF
 # ak1ra26
-[[ \$- != *i* ]] && return # If not running interactively, don't do anything
-if [ -f /media/Data/Mega/sh/lib/base.so ]; then
-    source /media/Data/Mega/sh/lib/base.so # Personal library.
+[[ $- != *i* ]] && return # If not running interactively, don't do anything
+if [ -f /media/Data/Projects/Github/lib/lib.so ]; then
+source /media/Data/Projects/Github/lib/lib.so # особиста бібліотека.
 fi
 EOF
 fi
@@ -159,7 +159,7 @@ do
             mkdir -p /home/${URN}/.config/fcitx5 && ln -sf $Dir_Data/Projects/Github/arch/IM/fcitx/profile /home/${URN}/.config/fcitx5/profile
         fi
         # Install additional packages for KDE
-        pacman -S --needed okular kwallet-pam qt5-imageformats kimageformats --noconfirm
+        pacman -S --needed okular kwallet-pam qt5-imageformats kimageformats libheif --noconfirm
         break
         ;;
     "I don't need no educa... desktop")
