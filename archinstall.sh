@@ -184,7 +184,6 @@ if grep "\. /" /home/${URN}/.bashrc | grep --quiet "lib.so"; then
     echo "Bash_aliases is ON. Skip";
 else
 cat > /home/${URN}/.bashrc <<EOF
-# ak1ra26
 [[ $- != *i* ]] && return # If not running interactively, don't do anything
 if [ -f /media/Data/Projects/Github/lib/lib.so ]; then
 source /media/Data/Projects/Github/lib/lib.so # особиста бібліотека.
@@ -195,7 +194,6 @@ fi
 . /home/${URN}/.bashrc # Turn on .bashrc in this part
 
 chown -R $URN:$URN /media/Data/
-find $Dir_Mega/sh/ -type f -iname "*.sh" -exec chmod +x {} \;
 find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Function to check if a package is installed using pacman
@@ -215,9 +213,9 @@ done
 if [ ${#not_installed[@]} -eq 0 ]; then
     echo "All packages were installed successfully."
 else
-    echo "The following packages were not installed:"
+    echo "The following packages were not installed:" > /home/${URN}/not_installed.log
     for package in "${not_installed[@]}"; do
-        echo -e "  - \033[31m$package\033[0m"
+        echo -e "  - \033[31m$package\033[0m" >> > /home/${URN}/not_installed.log
     done
 fi
 
@@ -236,8 +234,8 @@ ln -sv $Dir_Data/Media/Music /home/${URN}/Music
 d_chck="/home/${URN}/Downloads" && d_check
 ln -sv $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
-ln -sv $Dir_Mega/sh/config/home_hidden /home/${URN}/.hidden
-ln -sv $Dir_Mega/sh/config/xbindkeysrc /home/${URN}/.xbindkeysrc
+ln -sv $Dir_Data/Projects/Github/arch/KDE/home_hidden /home/${URN}/.hidden
+ln -sv $Dir_Data/Projects/Github/arch/KDE/xbindkeysrc /home/${URN}/.xbindkeysrc
 cat $Dir_Data/Media/Documents/Work/Logins | grep "n@remote.q" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Data/Media/Documents/Work/auto_vpn >> /home/${URN}/faststart
@@ -249,7 +247,7 @@ ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/Work.desktop /home/${URN}
 ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
 ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
 rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
-ln -sv $Dir_Mega/sh/config/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
+ln -sv $Dir_Data/Projects/Github/arch/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
 rm -rf /home/${URN}/.config/kscreenlockerrc
 ln -sv $Dir_Data/Projects/Github/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
 rm -rf /home/${URN}/.config/kxkbrc

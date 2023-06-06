@@ -1,0 +1,115 @@
+<!DOCTYPE Menu PUBLIC '-//freedesktop//DTD Menu 1.0//EN' 'http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd'>
+<Menu>
+ <Include/>
+ <Menu>
+  <Name>Internet</Name>
+  <Layout>
+   <Merge type="menus"/>
+   <Menuname>Terminal</Menuname>
+   <Merge type="files"/>
+   <Filename>bssh.desktop</Filename>
+   <Filename>bvnc.desktop</Filename>
+   <Filename>firefox-beta-bin.desktop</Filename>
+   <Filename>firefox.desktop</Filename>
+   <Filename>google-chrome.desktop</Filename>
+   <Filename>slack.desktop</Filename>
+   <Filename>org.telegram.desktop.desktop</Filename>
+   <Filename>transmission-qt.desktop</Filename>
+   <Separator/>
+   <Menuname>More</Menuname>
+   <Filename>Work.desktop</Filename>
+  </Layout>
+  <Include>
+   <Filename>Work.desktop</Filename>
+  </Include>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Office</Name>
+  <Layout>
+   <Merge type="menus"/>
+   <Menuname>More</Menuname>
+  </Layout>
+  <Include/>
+  <Exclude>
+   <Filename>Work.desktop</Filename>
+  </Exclude>
+  <Deleted/>
+ </Menu>
+ <Exclude>
+  <Filename>Work.desktop</Filename>
+  <Filename>Work_test.desktop</Filename>
+ </Exclude>
+ <Menu>
+  <Name>Development</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Education</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Graphics</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Multimedia</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Science</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Utilities</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Applications</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>System</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Settingsmenu</Name>
+  <Deleted/>
+ </Menu>
+ <Menu>
+  <Name>Games</Name>
+  <Exclude>
+   <Filename>Project Zomboid.desktop</Filename>
+   <Filename>Graveyard Keeper.desktop</Filename>
+  </Exclude>
+  <Layout>
+   <Merge type="menus"/>
+   <Menuname>Arcade</Menuname>
+   <Menuname>Board</Menuname>
+   <Menuname>Card</Menuname>
+   <Menuname>Logic</Menuname>
+   <Menuname>TacticStrategy</Menuname>
+   <Merge type="files"/>
+   <Filename>steam.desktop</Filename>
+  </Layout>
+  <Menu>
+   <Name>Kidsgames</Name>
+   <Deleted/>
+  </Menu>
+ </Menu>
+ <Menu>
+  <Name>.hidden</Name>
+  <Include>
+   <Filename>Project Zomboid.desktop</Filename>
+   <Filename>Graveyard Keeper.desktop</Filename>
+   <Filename>Work_test.desktop</Filename>
+  </Include>
+  <Layout/>
+  <Exclude/>
+ </Menu>
+ <Layout>
+  <Merge type="menus"/>
+  <Menuname>.hidden</Menuname>
+  <Menuname>Games</Menuname>
+ </Layout>
+</Menu>
