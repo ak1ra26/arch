@@ -259,6 +259,8 @@ ln -sv $Dir_Data/Projects/Github/arch/KDE/khotkeysrc /home/${URN}/.config/khotke
 rm -rf /home/${URN}/.local/share/user-places.xbel
 ln -sv $Dir_Data/Projects/Github/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
 
+curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh>/home/$URN/yay.sh; chmod +x /home/$URN/yay.sh
+
 # Виход з chroot та розмонтовування розділів
 exit
 umount -R /mnt
