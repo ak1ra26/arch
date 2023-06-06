@@ -2,6 +2,10 @@
 update_info=kxkb.upd:remove-empty-lists,kxkb.upd:add-back-resetoptions,kxkb_variants.upd:split-variants
 
 [Layout]
-LayoutList=us
+DisplayNames=,
+LayoutList=us,ua
+Options=grp:alt_space_toggle,grp:alt_shift_toggle,grp:win_space_toggle
+ResetOldOptions=true
 SwitchMode=WinClass
 Use=true
+VariantList=,

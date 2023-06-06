@@ -2,7 +2,7 @@
 set -uo pipefail # If a variable gets an error the script exits immediately.
 trap 'S="${?}" ; echo "${0}" : Error on line "${LINENO}" : "${BASH_COMMAND}" ; exit "${S}"' ERR
 
-URN="alex";yayvbox="";vboxpack="";desktopselect="";
+URN="alex";desktopselect="";
 
 asksure() {
     while true; do
