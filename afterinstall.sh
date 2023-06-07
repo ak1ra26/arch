@@ -33,13 +33,8 @@ fi
 packages=(
     "google-chrome"
     "slack-desktop"
-    "firefox-beta-bin"
-    "authy"
     "windscribe-cli"
-    "sni-qt"
-    "perl-image-exiftool"
     "libreoffice-fresh"
-    "nuspell"
     "ttf-google-fonts-git"
 )
 
@@ -67,8 +62,7 @@ yay --save --answerdiff None --answerclean None --removemake -S "${packages[@]}"
 if [[ "${packages[*]}" =~ "go" ]]; then
     git clone https://github.com/kanocz/plasma-applet-eventcalendar eventcalendar # OAuth2 authorization
     # git clone https://github.com/Zren/plasma-applet-eventcalendar.git eventcalendar # original, but without OAuth2
-    cd eventcalendar || exit 1
-    sh ./install && rm -rf eventcalendar
+    sh ./eventcalendar/install && rm -rf eventcalendar
 fi
 
 # Function to check if a package is installed using pacman
@@ -93,3 +87,5 @@ else
         echo -e "  - \033[31m$package\033[0m"
     done
 fi
+
+sudo systemctl enable windscribe.service

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -i
 
 NC='\033[0m'
 c_red='\033[0;31m'
@@ -8,6 +8,7 @@ confirm() {
   local prompt="${1:-Proceed?} [${c_green}Y${NC}/${c_red}n${NC}]: "
   echo -en "$prompt"
   read -n 1 choice
+  echo -e "\n"  # Перенесення на новий рядок
   case "$choice" in
     y|Y ) return 0;;
     n|N ) return 1;;
@@ -16,11 +17,11 @@ confirm() {
 }
 
 # Зчитування змінних зі значеннями за замовчуванням
-read -rp "Enter your username [alex]: " URN
-URN="${URN:-alex}"
+read -rp "Enter your username [user]: " URN
+URN="${URN:-user}"
 
-read -rp "Enter hostname [archbase]: " HTN
-HTN="${HTN:-archbase}"
+read -rp "Enter hostname [arch]: " HTN
+HTN="${HTN:-arch}"
 
 # Зчитування змінної URP з введення користувача з прихованим виведенням
 read -rs -p "Enter your password: " URP
@@ -73,12 +74,12 @@ mkdir /mnt/boot
 mount /dev/${disk}1 /mnt/boot
 
 # Update mirrorlist
-reflector --verbose --country 'Ukraine,Germany' -l 25 -p https --sort rate  --save /etc/pacman.d/mirrorlist
+reflector --verbose --country 'Ukraine' -l 10 -p https --sort rate  --save /etc/pacman.d/mirrorlist
 
-pacman -Syu --noconfirm
+pacman -Sy --noconfirm
 
 # Встановлення базової системи
-pacstrap /mnt base base-devel linux-zen linux-firmware intel-ucode nano vim reflector bash-completion git curl
+pacstrap /mnt base base-devel linux-zen linux-firmware intel-ucode nano vim bash-completion git curl wget
 
 # Налаштування файлу fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -87,7 +88,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 # Налаштування часової зони
-ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime; hwclock --systohc
+ln -sf /usr/share/zoneinfo/Europe/Kyiv /etc/localtime; hwclock --systohc
 
 # Налаштування необхідних локалей та мови системи
 echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen; locale-gen
@@ -105,10 +106,7 @@ echo "root:$URP" | chpasswd
 # Створення нового користувача та надання йому прав адміністратора
 useradd -m -G wheel $URN
 echo "$URN:$URP" | chpasswd
-echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-
-# Встановлення загрузчика Systemd-boot
-pacman -S --noconfirm systemd-boot
+echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers # FIX IT
 
 # Встановлення systemd-boot на EFI розділ
 bootctl --path=/boot install
@@ -116,16 +114,18 @@ bootctl --path=/boot install
 # Налаштування systemd-boot
 cat <<EOF > /boot/loader/loader.conf
 default arch.conf
-timeout 3
+timeout 2
 editor 0
 EOF
 
 cat <<EOF > /boot/loader/entries/arch.conf
 title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
+linux /vmlinuz-linux-zen
+initrd /initramfs-linux-zen.img
 options root=/dev/sda2 rw
 EOF
+
+!!!!!!!!!!!!!multilib!!!!!!!!!!!!!!!
 
 echo 'Please enter your choice of packages: '
 options=("default" "wayland test")
@@ -133,7 +133,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="xf86-video-intel onboard haruna songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole kate pulseaudio-alsa networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif"
+            PACKAGES="onboard haruna songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif dolphin"
             clear
             break
             ;;
@@ -150,8 +150,7 @@ pacman -S --needed $PACKAGES --noconfirm --disable-download-timeout
 
 systemctl enable NetworkManager
 systemctl enable sddm
-# sudo pacman -S bluez bluez-utils bluedevil pulseaudio-bluetoot
-# systemctl enable bluetooth.service
+systemctl enable bluetooth.service
 
 # Install Mega and Google API packages
 wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
@@ -183,7 +182,7 @@ fi
 if grep "\. /" /home/${URN}/.bashrc | grep --quiet "lib.so"; then
     echo "Bash_aliases is ON. Skip";
 else
-cat > /home/${URN}/.bashrc <<EOF
+cat > /home/${URN}/.bashrc << 'EOF'
 [[ $- != *i* ]] && return # If not running interactively, don't do anything
 if [ -f /media/Data/Projects/Github/lib/lib.so ]; then
 source /media/Data/Projects/Github/lib/lib.so # особиста бібліотека.
@@ -219,45 +218,30 @@ else
     done
 fi
 
-d_check(){
-[ -d "$d_chck" ] && rm -rf $d_chck
-}
+ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
+ln -sfv $Dir_Data/Media/Videos /home/${URN}/Videos
+ln -sfv $Dir_Data/Media/Pictures /home/${URN}/Pictures
+ln -sfv $Dir_Data/Media/Music /home/${URN}/Music
+ln -sfv $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
-d_chck="/home/${URN}/Documents" && d_check
-ln -sv $Dir_Data/Media/Documents /home/${URN}/Documents
-d_chck="/home/${URN}/Videos" && d_check
-ln -sv $Dir_Data/Media/Videos /home/${URN}/Videos
-d_chck="/home/${URN}/Pictures" && d_check
-ln -sv $Dir_Data/Media/Pictures /home/${URN}/Pictures
-d_chck="/home/${URN}/Music" && d_check
-ln -sv $Dir_Data/Media/Music /home/${URN}/Music
-d_chck="/home/${URN}/Downloads" && d_check
-ln -sv $Dir_Data/Media/Downloads /home/${URN}/Downloads
-
-ln -sv $Dir_Data/Projects/Github/arch/KDE/home_hidden /home/${URN}/.hidden
-ln -sv $Dir_Data/Projects/Github/arch/KDE/xbindkeysrc /home/${URN}/.xbindkeysrc
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/home_hidden /home/${URN}/.hidden
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/xbindkeysrc /home/${URN}/.xbindkeysrc
 cat $Dir_Data/Media/Documents/Work/Logins | grep "n@remote.q" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Data/Media/Documents/Work/auto_vpn >> /home/${URN}/faststart
 
-wget -qO- https://git.io/papirus-icon-theme-install | sh # icons
-mkdir -p /home/${URN}/.local/share
-ln -sv $Dir_Data/Projects/Github/arch/KDE/Dolphin/templates /home/${URN}/.local/share/ # Add templates
-ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
-ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
-ln -sv $Dir_Data/Projects/Github/arch/KDE/Applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
-rm -rf /home/${URN}/.config/menus/applications-kmenuedit.menu
-ln -sv $Dir_Data/Projects/Github/arch/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
-rm -rf /home/${URN}/.config/kscreenlockerrc
-ln -sv $Dir_Data/Projects/Github/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
-rm -rf /home/${URN}/.config/kxkbrc
-ln -sv $Dir_Data/Projects/Github/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
-rm -rf /home/${URN}/.config/khotkeysrc
-ln -sv $Dir_Data/Projects/Github/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
-rm -rf /home/${URN}/.local/share/user-places.xbel
-ln -sv $Dir_Data/Projects/Github/arch/KDE/Dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
-
-curl https://raw.githubusercontent.com/ak1ra26/arch/main/yay.sh>/home/$URN/yay.sh; chmod +x /home/$URN/yay.sh
+sudo pacman -S papirus-icon-theme
+mkdir -p /home/alex/.local/share/applications
+mkdir -p /home/alex/.config/menus/
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/dolphin/templates /home/${URN}/.local/share/ # Add templates
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications/steam.desktop /home/${URN}/.local/share/applications/steam.desktop # change name for steam
+# ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications-kmenuedit.menu /home/${URN}/.config/menus/applications-kmenuedit.menu # KDE applications
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/kscreenlockerrc /home/${URN}/.config/kscreenlockerrc # Disable auto-lock
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
+ln -sfv $Dir_Data/Projects/Github/arch/KDE/dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
 
 # Виход з chroot та розмонтовування розділів
 exit
