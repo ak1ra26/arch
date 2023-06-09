@@ -245,7 +245,7 @@ ln -sfv $Dir_Data/Projects/Github/arch/KDE/dolphin/user-places.xbel /home/${URN}
 
 # Installation and configuration of VLC
 pacman -S --needed vlc --noconfirm
-cvlc --reset-config cvlc --reset-config vlc://quit # Launch VLC to generate the configuration file.
+cvlc --reset-config vlc://quit # Launch VLC to generate the configuration file.
 sed -i '/^#\{0,1\}qt-privacy-ask=/s/.*/qt-privacy-ask=0/' /home/${URN}/.config/vlc/vlcrc # Disable network policy prompt at startup
 sed -i '/^#\{0,1\}metadata-network-access=/s/.*/metadata-network-access=0/' /home/${URN}/.config/vlc/vlcrc # Disable metadata network access
 sed -i '/^#\{0,1\}aout=/s/.*/aout=alsa/' /home/${URN}/.config/vlc/vlcrc # Resolve audio stuttering after pausing/resuming playback
