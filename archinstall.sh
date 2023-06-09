@@ -133,7 +133,7 @@ select optpackages in "${options[@]}"
 do
     case $optpackages in
         "default")
-            PACKAGES="onboard haruna songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif dolphin"
+            PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif dolphin"
             clear
             break
             ;;
@@ -242,6 +242,14 @@ ln -sfv $Dir_Data/Projects/Github/arch/KDE/kscreenlockerrc /home/${URN}/.config/
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/kxkbrc /home/${URN}/.config/kxkbrc # Add UA lang
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/khotkeysrc /home/${URN}/.config/khotkeysrc # Hotkeys
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/dolphin/user-places.xbel /home/${URN}/.local/share/user-places.xbel # Configure places in Dolphine
+
+# Installation and configuration of VLC
+pacman -S --needed vlc --noconfirm
+cvlc --reset-config --play-and-exit $Dir_lib/sounds/done_1.wav # Launch VLC to generate the configuration file.
+sed -i '/^#\{0,1\}qt-privacy-ask=/s/.*/qt-privacy-ask=0/' /home/${URN}/.config/vlc/vlcrc # Disable network policy prompt at startup
+sed -i '/^#\{0,1\}metadata-network-access=/s/.*/metadata-network-access=0/' /home/${URN}/.config/vlc/vlcrc # Disable metadata network access
+sed -i '/^#\{0,1\}aout=/s/.*/aout=alsa/' /home/${URN}/.config/vlc/vlcrc # Resolve audio stuttering after pausing/resuming playback
+sed -i '/^#\{0,1\}qt-continue=/s/.*/qt-continue=2/' /home/${URN}/.config/vlc/vlcrc # Enable continuous playback.
 
 # Виход з chroot та розмонтовування розділів
 exit

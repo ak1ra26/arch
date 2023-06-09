@@ -1,5 +1,8 @@
 Settings:
 
+lookandfeeltool -a org.kde.breezedark.desktop # встановить темну тему.
+
+
 1. Set animation speed to more instant
 # Змінюємо значення параметра AnimationSpeed на 0
 sed -i 's/AnimationSpeed=.*/AnimationSpeed=0/g' "$HOME/.config/kwinrc"
