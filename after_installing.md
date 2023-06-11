@@ -1,4 +1,16 @@
 Settings:
++++ /home/user/.config/kdeglobals	2023-06-09 16:45:45.492968412 +0300
+@@ -140,7 +140,7 @@
+ widgetStyle=breezedark
+
+ [Icons]
+-Theme=Papirus-Light
++Theme=Papirus-Dark
+
+ [KDE]
+ AnimationDurationFactor=0
+
+
 
 lookandfeeltool -a org.kde.breezedark.desktop # встановить темну тему.
 

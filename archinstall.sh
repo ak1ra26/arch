@@ -68,43 +68,27 @@ parted /dev/$disk mkpart primary ext4 513MiB 100%
 mkfs.fat -F32 /dev/${disk}1
 mkfs.ext4 /dev/${disk}2
 
-# Монтування розділів
 mount /dev/${disk}2 /mnt
 mkdir /mnt/boot
 mount /dev/${disk}1 /mnt/boot
 
-# Update mirrorlist
 reflector --verbose --country 'Ukraine' -l 10 -p https --sort rate  --save /etc/pacman.d/mirrorlist
-
 pacman -Sy --noconfirm
 
 # Встановлення базової системи
 pacstrap /mnt base base-devel linux-zen linux-firmware intel-ucode nano vim bash-completion git curl wget
-
-# Налаштування файлу fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Зміна кореневого каталогу
 arch-chroot /mnt
 
-# Налаштування часової зони
 ln -sf /usr/share/zoneinfo/Europe/Kyiv /etc/localtime; hwclock --systohc
-
-# Налаштування необхідних локалей та мови системи
 echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen; locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo ${HTN} > /etc/hostname # Налаштування імені хоста
+echo -e "127.0.0.1  localhost\n::1        localhost\n127.0.1.1  ${HTN}.localdomain ${HTN}" > /etc/hosts # Налаштування файлу hosts
 
-# Налаштування імені хоста
-echo ${HTN} > /etc/hostname
-
-# Налаштування файлу hosts
-echo -e "127.0.0.1  localhost\n::1        localhost\n127.0.1.1  ${HTN}.localdomain ${HTN}" > /etc/hosts
-
-# Налаштування пароля для користувача root
-echo "root:$URP" | chpasswd
-
-# Створення нового користувача та надання йому прав адміністратора
 useradd -m -G wheel $URN
+echo "root:$URP" | chpasswd
 echo "$URN:$URP" | chpasswd
 echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers # FIX IT
 
@@ -125,38 +109,19 @@ initrd /initramfs-linux-zen.img
 options root=/dev/sda2 rw
 EOF
 
-!!!!!!!!!!!!!multilib!!!!!!!!!!!!!!!
+sed -i 's/^# \[multilib\]/[multilib]/' /etc/pacman.conf
+sed -i '/^\[multilib\]$/{n;s/^#//}' /etc/pacman.conf
 
-echo 'Please enter your choice of packages: '
-options=("default" "wayland test")
-select optpackages in "${options[@]}"
-do
-    case $optpackages in
-        "default")
-            PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif dolphin"
-            clear
-            break
-            ;;
-        "wayland test")
-            PACKAGES="wayland xorg-xwayland"
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
 
 # Install necessary packages and libraries
-pacman -S --needed $PACKAGES --noconfirm --disable-download-timeout
-
-systemctl enable NetworkManager
-systemctl enable sddm
-systemctl enable bluetooth.service
+PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
+while ! pacman -S --needed $PACKAGES --noconfirm; do echo "Installation failed. Retrying..."; done
+systemctl enable NetworkManager sddm bluetooth
 
 # Install Mega and Google API packages
 wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
 pacman -U megasync-x86_64.pkg.tar.zst --noconfirm
-pip install google-api-python-client -q
-pip install oauth2client -q
+pip install google-api-python-client oauth2client -q
 echo "Necessary pip packages and libraries were installed"
 
 echo 'Please select your device:: '
@@ -190,9 +155,8 @@ fi
 EOF
 fi
 
-. /home/${URN}/.bashrc # Turn on .bashrc in this part
-
 chown -R $URN:$URN /media/Data/
+. /home/${URN}/.bashrc # Turn on .bashrc in this part
 find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Function to check if a package is installed using pacman
@@ -218,6 +182,11 @@ else
     done
 fi
 
+dolphinrc=~/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowSelectionToggle=false", "ShowFullPath=true", "ShowZoomSlider=false")
+if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [ContextMenu]\nShowAddToPlaces=false\nShowSortBy=false\nShowViewMode=false\n' "$dolphinrc"; fi
+for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
+
+test -e $Dir_Data/Media/Documents && OK || { echo "Can't find Dir_Data"; . /home/${URN}/.bashrc; find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;}
 ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
 ln -sfv $Dir_Data/Media/Videos /home/${URN}/Videos
 ln -sfv $Dir_Data/Media/Pictures /home/${URN}/Pictures
