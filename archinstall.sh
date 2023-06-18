@@ -1,32 +1,16 @@
 #!/bin/bash -i
-
-NC='\033[0m'
-c_red='\033[0;31m'
-c_green='\033[0;32m'
+NC='\033[0m'; c_red='\033[0;31m'; c_green='\033[0;32m'
 
 confirm() {
-  local prompt="${1:-Proceed?} [${c_green}Y${NC}/${c_red}n${NC}]: "
-  echo -en "$prompt"
-  read -n 1 choice
-  echo -e "\n"  # Перенесення на новий рядок
-  case "$choice" in
-    y|Y ) return 0;;
-    n|N ) return 1;;
-    * ) echo "Invalid choice"; return 1;;
-  esac
+#     local prompt="${1:-Proceed?} [${c_green}Y${NC}/${c_red}n${NC}]: "
+#     echo -en "$prompt"
+#     read -n 1 choice
+#     echo -e "\n"  # Перенесення на новий рядок
+    read -n 1 -p "${1:-Proceed?} [${c_green}Y${NC}/${c_red}n${NC}]: " choice; echo -e "\n"
+    case "$choice" in y|Y) return 0;; n|N) return 1;; *) echo "Invalid choice"; return 1;; esac
 }
 
-# Зчитування змінних зі значеннями за замовчуванням
-read -rp "Enter your username [user]: " URN
-URN="${URN:-user}"
-
-read -rp "Enter hostname [arch]: " HTN
-HTN="${HTN:-arch}"
-
-# Зчитування змінної URP з введення користувача з прихованим виведенням
-read -rs -p "Enter your password: " URP
-echo "Password entered."
-
+inst_arch() {
 echo "This step can help resolve issues with Pacman keys, in case an old ArchLinux ISO is being used."
 confirm "Update pacman keys?" && pacman-key --refresh-keys || echo "Key update skipped."
 
@@ -79,7 +63,25 @@ pacman -Sy --noconfirm
 pacstrap /mnt base base-devel linux-zen linux-firmware intel-ucode nano vim bash-completion git curl wget
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt
+cp $0 /mnt/
+chmod +x /mnt/$(basename "$0")
+# arch-chroot /mnt /bin/bash -c "$0"
+# arch-chroot /mnt /bin/bash "$0"
+arch-chroot /mnt /bin/bash -c "/$(basename "$0")"
+umount -R /mnt
+
+# Повідомлення про завершення установки
+echo "Установка Arch Linux завершена. Видаліть установочний носій і перезавантажте систему."
+}
+
+inst_chroot() {
+# Зчитування змінних зі значеннями за замовчуванням
+read -rp "Enter your username [user]: " URN
+URN="${URN:-user}"
+read -rp "Enter hostname [arch]: " HTN
+HTN="${HTN:-arch}"
+read -rs -p "Enter your password: " URP
+echo "Password entered."
 
 ln -sf /usr/share/zoneinfo/Europe/Kyiv /etc/localtime; hwclock --systohc
 echo -e "en_US.UTF-8 UTF-8\nuk_UA.UTF-8 UTF-8" > /etc/locale.gen; locale-gen
@@ -117,6 +119,17 @@ sed -i '/^\[multilib\]$/{n;s/^#//}' /etc/pacman.conf
 PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
 while ! pacman -S --needed $PACKAGES --noconfirm; do echo "Installation failed. Retrying..."; done
 systemctl enable NetworkManager sddm bluetooth
+
+autologin="/etc/sddm.conf.d/autologin.conf"
+if [ -f "$autologin" ]; then
+  # Файл існує - оновити його з новими значеннями
+    sed -i "s/^User=.*$/User=${URN}/" "$autologin"
+    sed -i "s/^Session=.*$/Session=plasma/" "$autologin"
+else
+    echo "[Autologin]" > "$autologin"
+    echo "User=${URN}" >> "$autologin"
+    echo "Session=plasma" >> "$autologin"
+fi
 
 # Install Mega and Google API packages
 wget mega.nz/linux/repo/Arch_Extra/x86_64/megasync-x86_64.pkg.tar.zst
@@ -187,11 +200,13 @@ if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [Contex
 for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
 
 test -e $Dir_Data/Media/Documents && OK || { echo "Can't find Dir_Data"; . /home/${URN}/.bashrc; find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;}
-ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
-ln -sfv $Dir_Data/Media/Videos /home/${URN}/Videos
-ln -sfv $Dir_Data/Media/Pictures /home/${URN}/Pictures
-ln -sfv $Dir_Data/Media/Music /home/${URN}/Music
-ln -sfv $Dir_Data/Media/Downloads /home/${URN}/Downloads
+dirs=("Documents" "Videos" "Pictures" "Music" "Downloads")
+for dir in "${dirs[@]}"; do ln -sfv "$Dir_Data/Media/$dir" "/home/${URN}/$dir"; done
+# ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
+# ln -sfv $Dir_Data/Media/Videos /home/${URN}/Videos
+# ln -sfv $Dir_Data/Media/Pictures /home/${URN}/Pictures
+# ln -sfv $Dir_Data/Media/Music /home/${URN}/Music
+# ln -sfv $Dir_Data/Media/Downloads /home/${URN}/Downloads
 
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/home_hidden /home/${URN}/.hidden
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/xbindkeysrc /home/${URN}/.xbindkeysrc
@@ -220,13 +235,15 @@ sed -i '/^#\{0,1\}metadata-network-access=/s/.*/metadata-network-access=0/' /hom
 sed -i '/^#\{0,1\}aout=/s/.*/aout=alsa/' /home/${URN}/.config/vlc/vlcrc # Resolve audio stuttering after pausing/resuming playback
 sed -i '/^#\{0,1\}qt-continue=/s/.*/qt-continue=2/' /home/${URN}/.config/vlc/vlcrc # Enable continuous playback.
 
-# Виход з chroot та розмонтовування розділів
+# Виход з chroot
 exit
-umount -R /mnt
+}
 
-# Повідомлення про завершення установки
-echo "Установка Arch Linux завершена. Видаліть установочний носій і перезавантажте систему."
-
-
-
-
+{
+    if [ -e "/mnt/etc/arch-chroot" ]; then
+        inst_chroot
+    else
+        inst_arch
+    fi
+    echo ; echo " Script log available, run 'less archinstall.log'"
+} |& tee archinstall.log
