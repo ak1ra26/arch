@@ -74,7 +74,7 @@ arch-chroot /mnt /bin/bash -c "/$(basename "$0")"
 umount -R /mnt
 
 # Повідомлення про завершення установки
-echo "Установка Arch Linux завершена. Видаліть установочний носій і перезавантажте систему."
+echo "The installation of Arch Linux is complete. Please remove the installation media and reboot the system."
 }
 
 inst_chroot() {
@@ -108,19 +108,24 @@ timeout 2
 editor 0
 EOF
 
+PARTUUID=$(lsblk -no PARTUUID /dev/${disk}2)
+
 cat <<EOF > /boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux-zen
 initrd /intel-ucode.img
 initrd /initramfs-linux-zen.img
-options root=/dev/sda2 rw
-#options root=PARTUUID=8d2eb013-b0f8-4c79-b0a3-75f890db2e1f rw rootfstype=ext4
+options root=PARTUUID=$PARTUUID rw rootfstype=ext4
 EOF
 
-sed -i 's/^# \[multilib\]/[multilib]/' /etc/pacman.conf
-sed -i '/^\[multilib\]$/{n;s/^#//}' /etc/pacman.conf
+# Enable multilib repo
+cp /etc/pacman.conf /etc/pacman.conf.backup
+mline=$(grep -n "\\[multilib\\]" /etc/pacman.conf | cut -d: -f1)
+rline=$(($mline + 1))
+sed -i ''$mline's|#\[multilib\]|\[multilib\]|g' /etc/pacman.conf
+sed -i ''$rline's|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g' /etc/pacman.conf
 
-pacman -Sy
+pacman -Sy --noconfirm
 
 # Install necessary packages and libraries
 PACKAGES="onboard songrec aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
@@ -205,10 +210,6 @@ else
     done
 fi
 
-dolphinrc=home/${URN}/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowSelectionToggle=false", "ShowFullPath=true", "ShowZoomSlider=false")
-if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [ContextMenu]\nShowAddToPlaces=false\nShowSortBy=false\nShowViewMode=false\n' "$dolphinrc"; fi
-for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
-
 dirs=("Documents" "Videos" "Pictures" "Music" "Downloads")
 for dir in "${dirs[@]}"; do ln -sfv "$Dir_Data/Media/$dir" "/home/${URN}/$dir"; done
 # ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
@@ -252,15 +253,18 @@ echo "enter exit"
 }
 
 {
-    echo "test"
-    if [ -n "$CHROOT" ]; then
-        echo "You are in a chroot environment."
-        inst_chroot
-    else
-        echo "You are not in a chroot environment."
-        inst_arch
-    fi
+read -n 1 -p "Choose an option: 1) inst_arch 2) inst_chroot: " choice
+echo
+
+if [ "$choice" == "1" ]; then
+    echo "You selected inst_arch."
+    inst_arch
+elif [ "$choice" == "2" ]; then
+    echo "You selected inst_chroot."
+    inst_chroot
+else
+    echo "Invalid choice."
+fi
 
     echo ; echo " Script log available, run 'less archinstall.log'"
 } |& tee archinstall.log
-

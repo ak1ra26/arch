@@ -15,6 +15,10 @@ ask_sure() {
     [[ "${answer,,}" =~ ^(yes|y)$ ]]
 }
 
+dolphinrc=$HOME/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowSelectionToggle=false", "ShowFullPath=true", "ShowZoomSlider=false")
+if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [ContextMenu]\nShowAddToPlaces=false\nShowSortBy=false\nShowViewMode=false\n' "$dolphinrc"; fi
+for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
+
 # Install yay package manager
 if ! command -v yay >/dev/null 2>&1; then
     echo "Installing yay"
