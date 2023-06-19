@@ -1,5 +1,8 @@
 #!/bin/bash -i
-NC='\033[0m'; c_red='\033[0;31m'; c_green='\033[0;32m'
+# NC='\033[0m'; c_red='\033[0;31m'; c_green='\033[0;32m'
+NC=$'\033[0m'
+c_red=$'\033[0;31m'
+c_green=$'\033[0;32m'
 
 confirm() {
 #     local prompt="${1:-Proceed?} [${c_green}Y${NC}/${c_red}n${NC}]: "
