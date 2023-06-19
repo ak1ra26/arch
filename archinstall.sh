@@ -111,17 +111,20 @@ EOF
 cat <<EOF > /boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux-zen
+initrd /intel-ucode.img
 initrd /initramfs-linux-zen.img
 options root=/dev/sda2 rw
+#options root=PARTUUID=8d2eb013-b0f8-4c79-b0a3-75f890db2e1f rw rootfstype=ext4
 EOF
 
 sed -i 's/^# \[multilib\]/[multilib]/' /etc/pacman.conf
 sed -i '/^\[multilib\]$/{n;s/^#//}' /etc/pacman.conf
 
+pacman -Sy
 
 # Install necessary packages and libraries
-PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
-while ! pacman -S --needed $PACKAGES --noconfirm; do echo "Installation failed. Retrying..."; done
+PACKAGES="onboard songrec aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
+pacman -S --needed $PACKAGES --noconfirm
 systemctl enable NetworkManager sddm bluetooth
 
 autologin="/etc/sddm.conf.d/autologin.conf"
@@ -153,13 +156,9 @@ else
 fi
 done
 
-mkdir -p /media/{Data,Share}
-if grep --quiet "$UUID_Data" /etc/fstab; then
-    echo Data exists
-else
-    echo -e "\n# Data\nUUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
-    mount UUID=$UUID_Data /media/Data
-fi
+mkdir -p /media/Data
+echo -e "\n# Data\nUUID=$UUID_Data /media/Data               ext4    errors=remount-ro,auto,user,rw,exec 0       0" >> /etc/fstab
+mount UUID=$UUID_Data /media/Data
 
 if grep "\. /" /home/${URN}/.bashrc | grep --quiet "lib.so"; then
     echo "Bash_aliases is ON. Skip";
@@ -175,6 +174,13 @@ fi
 chown -R $URN:$URN /media/Data/
 . /home/${URN}/.bashrc # Turn on .bashrc in this part
 find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+test -e $Dir_Data/Media/Documents && OK "test Dir_Data - OK" ||
+{
+    echo "Can't find Dir_Data"
+    . /home/${URN}/.bashrc
+    find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
+}
 
 # Function to check if a package is installed using pacman
 is_package_installed() {
@@ -199,16 +205,9 @@ else
     done
 fi
 
-dolphinrc=~/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowSelectionToggle=false", "ShowFullPath=true", "ShowZoomSlider=false")
+dolphinrc=home/${URN}/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowSelectionToggle=false", "ShowFullPath=true", "ShowZoomSlider=false")
 if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [ContextMenu]\nShowAddToPlaces=false\nShowSortBy=false\nShowViewMode=false\n' "$dolphinrc"; fi
 for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
-
-test -e $Dir_Data/Media/Documents && OK ||
-{
-    echo "Can't find Dir_Data"
-    . /home/${URN}/.bashrc
-    find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
-}
 
 dirs=("Documents" "Videos" "Pictures" "Music" "Downloads")
 for dir in "${dirs[@]}"; do ln -sfv "$Dir_Data/Media/$dir" "/home/${URN}/$dir"; done
@@ -227,8 +226,8 @@ echo "" >> /home/${URN}/faststart
 cat $Dir_Data/Media/Documents/Work/auto_vpn >> /home/${URN}/faststart
 
 sudo pacman -S papirus-icon-theme
-mkdir -p /home/alex/.local/share/applications
-mkdir -p /home/alex/.config/menus/
+mkdir -p /home/${URN}/.local/share/applications
+mkdir -p /home/${URN}/.config/menus/
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/dolphin/templates /home/${URN}/.local/share/ # Add templates
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications/Work.desktop /home/${URN}/.local/share/applications/Work.desktop
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/applications/firefox-beta-bin.desktop /home/${URN}/.local/share/applications/firefox-beta-bin.desktop # change ff-beta's icon
