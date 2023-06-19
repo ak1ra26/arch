@@ -191,7 +191,7 @@ if [ ${#not_installed[@]} -eq 0 ]; then
 else
     echo "The following packages were not installed:" > /home/${URN}/not_installed.log
     for package in "${not_installed[@]}"; do
-        echo -e "  - \033[31m$package\033[0m" >> > /home/${URN}/not_installed.log
+        echo -e "  - \033[31m$package\033[0m" >> /home/${URN}/not_installed.log
     done
 fi
 
@@ -238,14 +238,17 @@ sed -i '/^#\{0,1\}aout=/s/.*/aout=alsa/' /home/${URN}/.config/vlc/vlcrc # Resolv
 sed -i '/^#\{0,1\}qt-continue=/s/.*/qt-continue=2/' /home/${URN}/.config/vlc/vlcrc # Enable continuous playback.
 
 # Виход з chroot
-exit
+echo "enter exit"
 }
 
 {
-    if [ -e "/mnt/etc/arch-chroot" ]; then
+    if [ -n "$CHROOT" ]; then
+        echo "You are in a chroot environment."
         inst_chroot
     else
+        echo "You are not in a chroot environment."
         inst_arch
     fi
+
     echo ; echo " Script log available, run 'less archinstall.log'"
 } |& tee archinstall.log
