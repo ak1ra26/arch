@@ -75,6 +75,7 @@ echo "Установка Arch Linux завершена. Видаліть уст�
 }
 
 inst_chroot() {
+
 # Зчитування змінних зі значеннями за замовчуванням
 read -rp "Enter your username [user]: " URN
 URN="${URN:-user}"
@@ -199,7 +200,13 @@ dolphinrc=~/.config/dolphinrc; general_lines=("RememberOpenedTabs=false", "ShowS
 if ! grep -q "\[ContextMenu\]" "$dolphinrc"; then sed -i '/\[General\]/i [ContextMenu]\nShowAddToPlaces=false\nShowSortBy=false\nShowViewMode=false\n' "$dolphinrc"; fi
 for line in "${general_lines[@]}"; do if ! grep -q "$line" "$dolphinrc"; then sed -i "/\[General\]/a $line" "$dolphinrc"; fi; done
 
-test -e $Dir_Data/Media/Documents && OK || { echo "Can't find Dir_Data"; . /home/${URN}/.bashrc; find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;}
+test -e $Dir_Data/Media/Documents && OK ||
+{
+    echo "Can't find Dir_Data"
+    . /home/${URN}/.bashrc
+    find $Dir_Data/Projects/ -type f -iname "*.sh" -exec chmod +x {} \;
+}
+
 dirs=("Documents" "Videos" "Pictures" "Music" "Downloads")
 for dir in "${dirs[@]}"; do ln -sfv "$Dir_Data/Media/$dir" "/home/${URN}/$dir"; done
 # ln -sfv $Dir_Data/Media/Documents /home/${URN}/Documents
@@ -239,6 +246,7 @@ sed -i '/^#\{0,1\}qt-continue=/s/.*/qt-continue=2/' /home/${URN}/.config/vlc/vlc
 
 # Виход з chroot
 echo "enter exit"
+
 }
 
 {
@@ -253,3 +261,4 @@ echo "enter exit"
 
     echo ; echo " Script log available, run 'less archinstall.log'"
 } |& tee archinstall.log
+
