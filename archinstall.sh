@@ -242,6 +242,7 @@ echo "enter exit"
 }
 
 {
+    echo "test"
     if [ -n "$CHROOT" ]; then
         echo "You are in a chroot environment."
         inst_chroot
