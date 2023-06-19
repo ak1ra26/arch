@@ -210,6 +210,8 @@ for dir in "${dirs[@]}"; do ln -sfv "$Dir_Data/Media/$dir" "/home/${URN}/$dir"; 
 
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/home_hidden /home/${URN}/.hidden
 ln -sfv $Dir_Data/Projects/Github/arch/KDE/xbindkeysrc /home/${URN}/.xbindkeysrc
+ln -sfv $Dir_config/.gitconfig /home/${URN}/.gitconfig
+ln -sfv $Dir_config/.git-credentials /home/${URN}/.git-credentials
 cat $Dir_Data/Media/Documents/Work/Logins | grep "n@remote.q" > /home/${URN}/faststart
 echo "" >> /home/${URN}/faststart
 cat $Dir_Data/Media/Documents/Work/auto_vpn >> /home/${URN}/faststart
