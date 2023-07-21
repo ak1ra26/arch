@@ -1,5 +1,5 @@
 [$Version]
-update_info=konsole_globalaccel.upd:konsole_globalaccel,spectacle_shortcuts.upd:spectacle-migrate-shortcuts
+update_info=konsole_globalaccel.upd:konsole_globalaccel,spectacle_shortcuts.upd:spectacle-migrate-shortcuts,konsole.upd:konsole_globalaccel
 
 [ColorEffects:Disabled]
 ChangeSelectionColor[$d]
@@ -280,7 +280,7 @@ ConditionsCount=0
 
 [Data_2_5_1]
 Comment=Run Google Chrome for crypto.
-Enabled=true
+Enabled=false
 Name=cryptochrome
 Type=SIMPLE_ACTION_DATA
 
@@ -306,7 +306,7 @@ Uuid={2db53c49-88b6-4d13-920c-a582bf3e12d1}
 
 [Data_2_5_2]
 Comment=Run Firefox-beta.
-Enabled=true
+Enabled=false
 Name=ff-beta
 Type=SIMPLE_ACTION_DATA
 
@@ -332,7 +332,7 @@ Uuid={de6958ce-16ac-4499-af7d-e434bee69048}
 
 [Data_2_5_3]
 Comment=Kill and run Firefox-beta.
-Enabled=true
+Enabled=false
 Name=ff-beta-re
 Type=SIMPLE_ACTION_DATA
 
@@ -359,7 +359,7 @@ Uuid={43307465-bcad-4b18-8efc-2d05f3d3cee4}
 [Data_2_5_4]
 Comment=Run firefox
 Enabled=true
-Name=ff-crypto
+Name=ff
 Type=SIMPLE_ACTION_DATA
 
 [Data_2_5_4Actions]
@@ -384,8 +384,8 @@ Uuid={927b564a-bca8-4a3a-a640-8294632f5a0c}
 
 [Data_2_5_5]
 Comment=Kill and run Firefox for crypto.
-Enabled=true
-Name=ff-crypto-re
+Enabled=false
+Name=ff-re
 Type=SIMPLE_ACTION_DATA
 
 [Data_2_5_5Actions]

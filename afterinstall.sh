@@ -39,7 +39,8 @@ packages=(
     "slack-desktop"
     "windscribe-cli"
     "libreoffice-fresh"
-    "ttf-google-fonts-git"
+    "ark"
+    "ttf-times-new-roman"
 )
 
 # Prompt user for confirmation before installing Virtualbox
