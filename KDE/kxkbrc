@@ -2,7 +2,9 @@
 update_info=kxkb.upd:remove-empty-lists,kxkb.upd:add-back-resetoptions,kxkb_variants.upd:split-variants
 
 [Layout]
-LayoutList=us
-Options=grp:alt_space_toggle,grp:alt_shift_toggle,grp:win_space_toggle,grp_led:scroll,lv3:enter_switch
+DisplayNames=,
+LayoutList=us,ua
+Options=grp:alt_space_toggle,grp:win_space_toggle,grp_led:scroll,lv3:enter_switch
 ResetOldOptions=true
 Use=true
+VariantList=,

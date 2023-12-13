@@ -7,7 +7,10 @@ LockGrace=300
 LockOnResume=false
 
 [Greeter]
-WallpaperPlugin=org.kde.slideshow
+WallpaperPlugin=org.kde.color
+
+[Greeter][Wallpaper][org.kde.color][General]
+Color=0,0,0
 
 [Greeter][Wallpaper][org.kde.slideshow][General]
 SlidePaths=/media/Data/Media/Pictures/wallpapers/Shared/
