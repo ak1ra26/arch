@@ -128,7 +128,7 @@ sed -i ''$rline's|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mi
 pacman -Sy --noconfirm
 
 # Install necessary packages and libraries
-PACKAGES="onboard songrec aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
+PACKAGES="onboard songrec aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip signal-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
 pacman -S --needed $PACKAGES --noconfirm
 systemctl enable NetworkManager sddm bluetooth
 

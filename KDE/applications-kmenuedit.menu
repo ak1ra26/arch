@@ -13,7 +13,6 @@
    <Filename>firefox.desktop</Filename>
    <Filename>google-chrome.desktop</Filename>
    <Filename>slack.desktop</Filename>
-   <Filename>org.telegram.desktop.desktop</Filename>
    <Filename>transmission-qt.desktop</Filename>
    <Separator/>
    <Menuname>More</Menuname>

@@ -58,7 +58,7 @@ sed -i '/^\[multilib\]$/{n;s/^#//}' /etc/pacman.conf
 
 
 # Install necessary packages and libraries
-PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip telegram-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
+PACKAGES="onboard songrec neofetch bashtop aspell hunspell-en_us ktouch yt-dlp zenity xbindkeys vokoscreen gst-plugins-ugly gst-plugins-bad transmission-qt gwenview steam otf-ipafont ffmpeg ffmpegthumbs spectacle firefox code python-pip signal-desktop plasma sddm konsole dolphin kate pulseaudio-alsa alsa-utils networkmanager network-manager-applet dhclient okular kwallet-pam qt5-imageformats kimageformats libheif xdotool"
 while ! pacman -S --needed $PACKAGES --noconfirm; do echo "Installation failed. Retrying..."; done
 systemctl enable NetworkManager sddm bluetooth
 
