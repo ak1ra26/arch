@@ -1,0 +1,10 @@
+Install:
+fcitx5-qt fcitx5-gtk fcitx5-mozc fcitx5-configtool adobe-source-han-sans-jp-fonts adobe-source-han-serif-jp-fonts
+
+sudo vim /etc/locale.gen
+sudo locale-gen
+
+add to ~/.bash_profile
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
