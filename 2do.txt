@@ -2,3 +2,7 @@
 Окремий скрипт займається тим, що пов'язано з середою оточення.
 #`lsblk -o PATH,UUID | grep '/dev/sdc1' | awk 'NF>1{print $NF}'`;
 #`lsblk -o PATH,UUID | grep '/dev/sdc2' | awk 'NF>1{print $NF}'`;
+
+
+
+yay -S adobe-source-han-sans-kr-fonts

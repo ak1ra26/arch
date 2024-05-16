@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xbel>
-<xbel xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
+<xbel xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:kdepriv="http://www.kde.org/kdepriv" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
  <info>
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
@@ -148,6 +148,17 @@
    </metadata>
   </info>
  </bookmark>
+ <bookmark href="file:///media/Data/Projects/E%E6%97%A5%E8%A8%98">
+  <title>E日記</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="inode-directory"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1712684300/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
  <bookmark href="file:///media/Data/Projects/Daigaku/Python/Udemy">
   <title>Udemy</title>
   <info>
@@ -211,6 +222,7 @@
     <UDI>/org/freedesktop/UDisks2/block_devices/sdb1</UDI>
     <isSystemItem>true</isSystemItem>
     <IsHidden>true</IsHidden>
+    <uuid>6f0617e9-3a7e-410d-99d3-3555b525d5a0</uuid>
    </metadata>
   </info>
  </separator>
@@ -403,9 +415,21 @@
     <UDI>/org/freedesktop/UDisks2/block_devices/sda2</UDI>
     <isSystemItem>true</isSystemItem>
     <IsHidden>true</IsHidden>
+    <uuid>24ed77b7-98fa-482a-b8a0-25c90afddf9a</uuid>
    </metadata>
   </info>
  </separator>
+ <bookmark href="file:///media/Data/Media/Downloads/Torrent/%D0%9F%D0%B5%D1%80%D0%B5%D1%80%D0%BE%D0%B4%D0%B6%D0%B5%D0%BD%D0%BD%D1%8F%20-%20%D0%96%D0%B8%D1%82%D1%82%D1%8F%20%D0%B7%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B2%20%D1%96%D0%BD%D1%88%D0%BE%D0%BC%D1%83%20%D1%81%D0%B2%D1%96%D1%82%D1%96%202%20-%202.mkv">
+  <title>Переродження - Життя з нуля в іншому світі 2 - 2.mkv</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="inode-directory"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1715790610/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
  <separator>
   <info>
    <metadata owner="http://www.kde.org">
